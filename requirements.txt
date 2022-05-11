@@ -11,3 +11,6 @@ six @ file:///AppleInternal/BuildRoot/Library/Caches/com.apple.xbs/Sources/pytho
 virtualenv==20.14.1
 Werkzeug==2.1.2
 zipp==3.8.0
+
+pip~=22.0.4
+SNAKES~=0.9.29
