@@ -1,13 +1,12 @@
 import snakes.plugins
 snakes.plugins.load('gv', 'snakes.nets', 'nets')
-from nets import (  # nets from load, runtime
+from nets import (  # nets from loading plugins, found at runtime
     PetriNet,
     Transition,
     Variable,
     Value,
     Place
 )
-
 
 
 def create_net():
@@ -48,17 +47,10 @@ def draw_transition(trans, attr):
     else:
         attr['label'] = '%s\n%s' % (trans.name, trans.guard)
 
-    # for engine in ('neato', 'dot', 'circo', 'twopi', 'fdp'):
-    #     net.draw(',test-gv-%s.png' % engine, engine=engine)
-    # s = StateGraph(net)
-    # s.build()
-    # s.draw(',test-gv-graph.png')
-
 
 def main():
-
     net = create_net()
-    net.draw('net-with-colors.png', place_attr=draw_place, trans_attr=draw_transition)
+    net.draw('my_net.png', place_attr=draw_place, trans_attr=draw_transition)
 
 
 if __name__ == "__main__":
