@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewpoint" content="width=width-device, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Home</title>
+    </head>
+    <body>
+        <h1>Flask Upload File</h1>
+
+        <form method="POST" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            {{ form.file() }}
+            {{ form.submit() }}
+        </form>
+
+        <h2>test alpha miner with given xes files</h2>
+
+        <p>
+            <a href="{{ url_for('l1') }}">Petri net for L1</a>
+        </p>
+    </body>
+</html>

@@ -21,7 +21,7 @@ class Event:
 
 
 class Trace:
-    def __init__(self, trace_id: string, events: List[Event]):
-        self.trace_id = trace_id
+    def __init__(self, attributes: List[Attribute], events: List[Event]):
+        self.attributes = attributes
         self.events = events
 

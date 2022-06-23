@@ -1,15 +1,17 @@
 import string
 import xml.etree.ElementTree as ET
+from typing import Union
+import warnings
 from dateutil import parser
+import numpy as np
 
 from xes_parser import datastructure
 
 
 def prepare(path_to_xes_file: string):
     """
-    converts xes file into two xml-header and xml-body files.
-    
-    :path_to_xes_file: path to the xes file that should be converted (string)
+    converts xes file into two xml-header and xml-body upload_files.
+    :path_tp_xes_file: path to the xes file that should be converted (string)
     :return: tuple of path to the header.xml and body.xml that the xes file was split into
     """
 
@@ -37,7 +39,7 @@ def prepare(path_to_xes_file: string):
             xes_copy.write(line)
         elif '<trace>' not in line and not first:
             new_file.write(line)
-        else:  
+        else:
             xes_copy.write(line)
 
     xes_copy.write('</log>\n')
@@ -52,67 +54,108 @@ def parse_header(path_to_header_xml: string):
 def parse_body(path_to_body_xml: string):
     """
     Generates trace and event objects according to the process in the xes file.
-    :param path_to_body_xml: path to the xml/xes file that contains the body part/trace information of the log
+    :param path_to_body_xml: path to the file that contains the body part/trace information of the xes file
     :return: list of all trace objects from the xes-body file. 
     """
 
     tree = ET.parse(path_to_body_xml)
     root = tree.getroot()
     traces = list(root)
-    
-    # list of list of events for each trace 
-    event_list = []
-    for trace in traces:
-        event_list.append(list(trace))
-    
+
+    # list of lists of events for each trace
+    event_list = [list(trace) for trace in traces]
+
     # create Trace objects 
     for i in range(0, len(traces)):
-        trace_id = event_list[i].pop(0)
+        trace_attrib = []
+        for j in event_list[i]:
+            if len(j.attrib) > 0:
+                trace_attrib.append(j)
+        event_list[i] = difference(event_list[i], trace_attrib)
 
         # convert to Event objects
         event_list_n = []
         for e in event_list[i]:
-            # here e (event) is just a list of strings/lines with the elements being the attributes --> conversion
+            # here e (event) is just a list of strings/lines with the elements being the attributes --> convert
             # into Event objects
             e = parse_event(e)
 
-            # event objects has no attributes --> delete event from event list of the trace
-            if len(e.attributes) == 0:
-                break
+            # event is of type None (start of lifecycle transition or no attributes) --> delete event from event list
+            # of the trace
+            if e is None:
+                continue
 
             event_list_n.append(e)
 
         # if event list is empty, the trace is not considered
         if len(event_list_n) == 0:
             break
-        
-        traces[i] = datastructure.Trace(trace_id.attrib.get('value'), event_list_n)
+
+        # TODO: check for all events in the trace whether they are complete before the trace ends and before the
+        #  following occurrence of the same event
+        # convert elements of trace_attributes into Attribute objects and create trace object
+        trace_attrib = [datastructure.Attribute(attr.get('key'), attr.get('value')) for attr in trace_attrib]
+        traces[i] = datastructure.Trace(trace_attrib, event_list_n)
 
     return traces
 
 
-def parse_event(event) -> datastructure.Event:
+def difference(lst1, lst2):
+    """
+    helper method for extracting the attributes of a trace: computes the difference of two lists of ElementTree.Elements
+    :param lst1: longer list (with trace attributes and events)
+    :param lst2: shorter list (only trace attributes)
+    :return: list with only events
+    """
+    # len(lst1) > len(lst2)
+    a = lst1
+    b = lst2
+    mask = np.full((len(a)), True)
+    for num in b:
+        for i, num2 in enumerate(a):
+            if num == num2 and mask[i]:
+                mask[i] = False
+                break
+
+    result = []
+    for j, m in enumerate(mask):
+        if m:
+            result.append(a[j])
+    return result
+
+
+def parse_event(event) -> Union[datastructure.Event, None]:
     """
     event in this case is only a list of strings, with each string representing an attribute line. This method
     converts the elements into Event object with the respective attributes
     :param event: list of attribute lines in string format
-    :return: Event object
+    :return: Event object or None, if event has no attributes
     """
+    if len(event) == 0:
+        return None
 
     attributes = []
-
+    has_name = False
     for attr in event:
         key = attr.attrib.get('key')
         val = attr.attrib.get('value')
+        # TODO: lifecycle transition, remove if statement
+        if 'lifecycle:transition' in key and 'start' in val:
+            return None
+        if 'name' in key:
+            has_name = True
         attributes.append(datastructure.Attribute(key, val))
-    
+
     # create Event object
+    if not has_name:
+        warnings.warn('event has no name, it will be ignored by the miner!')
+        return None
     event = datastructure.Event(attributes)
-    return event        
+    return event
 
 
 def main():
-    (header, body) = prepare('log_data/L1.xml')
+    (header, body) = prepare('log_data/running-example.xml')
     traces = parse_body(body)
     print(traces)
 
