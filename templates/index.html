@@ -1,24 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewpoint" content="width=width-device, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Home</title>
-    </head>
-    <body>
-        <h1>Flask Upload File</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewpoint" content="width=width-device, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+</head>
+<body>
+    <h1>Flask Upload File</h1>
 
-        <form method="POST" enctype="multipart/form-data">
-            {{ form.hidden_tag() }}
-            {{ form.file() }}
-            {{ form.submit() }}
-        </form>
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        {{ form.file() }}
+        {{ form.submit() }}
+    </form>
 
-        <h2>test alpha miner with given xes files</h2>
+<p>
+        <a href="{{ url_for('l1') }}">Petri net for L1</a>
+    </p>
+    <p>
+        <a href="{{ url_for('l2') }}">Petri net for L2</a>
+    </p>
+    <p>
+        <a href="{{ url_for('l3') }}">Petri net for L3</a>
+    </p>
+    <p>
+        <a href="{{ url_for('l4') }}">Petri net for L4</a>
+    </p>
+    <p>
+        <a href="{{ url_for('l5') }}">Petri net for L5</a>
+    </p>
+    <p>
+        <a href="{{ url_for('l6') }}">Petri net for L6</a>
+    </p>
+    <p>
+        <a href="{{ url_for('l7') }}">Petri net for L7</a>
+    </p>
+    <p>
+        <a href="{{ url_for('billinstances') }}">Petri net for billinstances</a>
+    </p>
+    <p>
+        <a href="{{ url_for('flyerinstances') }}">Petri net for flyerinstances</a>
+    </p>
+    <p>
+        <a href="{{ url_for('posterinstances') }}">Petri net for posterinstances</a>
+    </p>
 
-        <p>
-            <a href="{{ url_for('l1') }}">Petri net for L1</a>
-        </p>
-    </body>
+</body>
 </html>

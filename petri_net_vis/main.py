@@ -1,3 +1,4 @@
+import os.path
 from typing import List
 
 import alpha_miner.main as am
@@ -28,7 +29,7 @@ def create_net(path_to_xes):
         net.add_place(p)
 
     # create transitions
-    transitions = am.get_event_names_as_set(traces)
+    transitions = am.step_1_get_event_names_as_set(traces)
     for transition in transitions:
         t = Transition(str(transition))
         net.add_transition(t)
@@ -84,29 +85,37 @@ def key(places_list: List[ds.Place] = None, transition_list: List[ds.MyTransitio
 
 
 def graphviz_net(path_to_xes):
-    net = graphviz.Digraph('my Petri Net', filename='petri_net_vis/my_graphviz_net.gv', engine='neato')
+    file_name = os.path.basename(path_to_xes)
+    file_name = file_name.replace('.xes', '')
+    net = graphviz.Digraph('my Petri Net', filename=f'static/test_files/png_files/{file_name}', engine='neato')
 
+    # preparation
     (header, body) = am.prepare(path_to_xes)
     traces = am.parse_body(body)
-    places = am.step_6_create_places(traces)
+    event_names_llist = am.filtered_traces_list(traces)
+    event_names_set = am.step_1_get_event_names_as_set(traces)
+    first, last = am.step_2_3_first_last_event_names(event_names_llist)
+    step_4_5_relations = am.step_4_5(event_names_set, event_names_llist)
+    step_6_places = am.step_6_create_places(step_4_5_relations, first, last)
+    step_7_edges = am.step_7_create_edges(step_6_places)
+    # places = am.step_6_create_places(traces)
 
     # create places
     net.attr('node', shape='circle', fixedsize='true', width='0.7')
-    pl_legend = key(places, transition_list=None)
+    pl_legend = key(step_6_places, transition_list=None)
     for pl in pl_legend.values():
         net.node(str(pl))
 
     # create transitions
-    obj_transitions = [ds.MyTransition(t) for t in am.get_event_names_as_set(traces)]
+    obj_transitions = [ds.MyTransition(t) for t in am.step_1_get_event_names_as_set(traces)]
     trans_legend = key(places_list=None, transition_list=obj_transitions)
     net.attr('node', shape='box', style='filled', fillcolor='bisque')
     for t in trans_legend.values():
         net.node(str(t))
 
     # create edges
-    edges = am.step_7_create_edges(traces)
     net.attr('edge', arrowsize='0.7', len='10')
-    for e in edges:
+    for e in step_7_edges:
         if type(e.source) is ds.Place:
             net.edge(str(pl_legend.get(str(e.source))), str(trans_legend.get(str(e.direction))))
         else:
@@ -125,7 +134,7 @@ def graphviz_net(path_to_xes):
 def main():
     # net = create_net('log_data/L1.xes')
     # net.draw('petri_net_vis/my_net.png', place_attr=draw_place, trans_attr=draw_transition)
-    net = graphviz_net('log_data/running-example.xml')
+    net = graphviz_net('log_data/flyerinstances.xes')
     net.view()
 
 

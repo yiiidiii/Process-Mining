@@ -29,21 +29,101 @@ def home():
 
         net = petri_net_vis.main.graphviz_net(fpath)
         net.render(os.path.join("static/upload_nets", secure_filename(file.filename)), cleanup=True, format='png')
-        print(os.path.join("static/upload_nets", secure_filename(file.filename) + ".png"))
-        return render_template('user_image.html', user_image=os.path.join("static/upload_nets", secure_filename(file.filename) + ".png"))
+        return render_template('user_image.html', user_image=os.path.join("static/upload_nets", secure_filename(file.filename)) + '.png')
     return render_template('index.html', form=form)
-
-
-# def index():
-#     return render_template('templates/index.html')
 
 
 @app.route('/l1')
 def l1():
-    net = petri_net_vis.main.graphviz_net('static/test_files/L1.xes')
-    net.view()
-    return 'Your file is shown in the pdf viewer'
+    PATH_XES = 'static/test_files/xes_files/L1.xes'
+    PATH_NET = 'static/test_files/png_files/L1.pdf'
+
+    return visualize_net(PATH_XES, PATH_NET)
+
+
+@app.route('/l2')
+def l2():
+    PATH_XES = 'static/test_files/xes_files/L2.xes'
+    PATH_NET = 'static/test_files/png_files/L2.pdf'
+
+    return visualize_net(PATH_XES, PATH_NET)
+
+
+@app.route('/l3')
+def l3():
+    PATH_XES = 'static/test_files/xes_files/L3.xes'
+    PATH_NET = 'static/test_files/png_files/L3.pdf'
+
+    return visualize_net(PATH_XES, PATH_NET)
+
+
+@app.route('/l4')
+def l4():
+    PATH_XES = 'static/test_files/xes_files/L4.xes'
+    PATH_NET = 'static/test_files/png_files/L4.pdf'
+
+    return visualize_net(PATH_XES, PATH_NET)
+
+
+@app.route('/l5')
+def l5():
+    PATH_XES = 'static/test_files/xes_files/L5.xes'
+    PATH_NET = 'static/test_files/png_files/L5.pdf'
+
+    return visualize_net(PATH_XES, PATH_NET)
+
+
+@app.route('/l6')
+def l6():
+    PATH_XES = 'static/test_files/xes_files/L6.xes'
+    PATH_NET = 'static/test_files/png_files/L6.pdf'
+
+    return visualize_net(PATH_XES, PATH_NET)
+
+
+@app.route('/l7')
+def l7():
+    PATH_XES = 'static/test_files/xes_files/L7.xes'
+    PATH_NET = 'static/test_files/png_files/L7.pdf'
+
+    return visualize_net(PATH_XES, PATH_NET)
+
+
+@app.route('/billinstances')
+def billinstances():
+    PATH_XES = 'static/test_files/xes_files/billinstances.xes'
+    PATH_NET = 'static/test_files/png_files/billinstances.pdf'
+
+    return visualize_net(PATH_XES, PATH_NET)
+
+
+@app.route('/posterinstances')
+def posterinstances():
+    PATH_XES = 'static/test_files/xes_files/posterinstances.xes'
+    PATH_NET = 'static/test_files/png_files/posterinstances.pdf'
+
+    return visualize_net(PATH_XES, PATH_NET)
+
+
+@app.route('/flyerinstances')
+def flyerinstances():
+    PATH_XES = 'static/test_files/xes_files/flyerinstances.xes'
+    PATH_NET = 'static/test_file/png_files/flyerinstances.pdf'
+
+    return visualize_net(PATH_XES, PATH_NET)
+
+# TODO: add statistics 100%
+# TODO: css file 0%
+# TODO: Unittests 40%
+# TODO: correct alpha miner 100%
+
+
+def visualize_net(path_xes_file, path_net_file):
+    net = petri_net_vis.main.graphviz_net(f'{path_xes_file}')
+    net.render(f'{path_net_file}', cleanup=True, format='png')
+    return render_template('images_test_files.html', user_image=f'{path_net_file}' + '.png')
 
 
 if __name__ == "__main__":
     app.run(debug=True)
+    # l1()

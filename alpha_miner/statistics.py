@@ -1,3 +1,5 @@
+import datetime
+import csv
 import xes_parser.main as xp
 import alpha_miner.main as am
 from dateutil import parser
@@ -17,18 +19,26 @@ def num_events_total(path_to_xes_file):
     """
     (header, body) = xp.prepare(path_to_xes_file)
     traces = xp.parse_body(body)
-    event_list = am.map_all_events_to_name(traces)
-    events_set = am.get_event_names_as_set(traces)
+    event_list = am.filtered_traces_list(traces)  # this method, because it filters out all 'duplicate' events that are not the start of a lifecycle transition
+    events_set = am.step_1_get_event_names_as_set(traces)
 
-    events_occ_dict = {str(e): 0 for e in events_set}
+    events_occ_list = [{'event_name': str(event), 'occurrence': 0} for event in events_set]
 
     for events in event_list:
         # events = ['a', 'b', 'c']
-        for e in events_set:
-            num = events.count(e)
-            events_occ_dict[e] = events_occ_dict.get(e) + num
+        for d in events_occ_list:
+            num = events.count(d.get('event_name'))
+            d['occurrence'] = d.get('occurrence') + num
 
-    return {k: v for k, v in sorted(events_occ_dict.items(), key=lambda item: item[1], reverse=True)}
+    events_occ_list = sorted(events_occ_list, key=lambda x: x['occurrence'], reverse=True)
+
+    csv_path = open('static/statistics/event_number.csv', 'w')
+    writer = csv.DictWriter(csv_path, fieldnames=events_occ_list[0].keys())
+    writer.writeheader()
+    for di in events_occ_list:
+        writer.writerow(di)
+
+    return events_occ_list
 
 
 def get_durations_of_traces(path_to_xes_file):
@@ -40,16 +50,30 @@ def get_durations_of_traces(path_to_xes_file):
     (header, body) = xp.prepare(path_to_xes_file)
     traces = xp.parse_body(body)
 
-    trace_duration_dict = {next((x.value for x in t.attributes if x.key == 'concept:name'), None): 0 for t in traces}
+    trace_duration_dict = [{'trace_name': next((x.value for x in t.attributes if x.key == 'concept:name'), None),
+                            'duration': '0'} for t in traces]
     for trace in traces:
+        # here, events are not filtered out because of lifecycle transitions, because the correct duration is until when an event is 'complete'
+        trace_name = next((a.value for a in trace.attributes if a.key == 'concept:name'), None)
         time_start = next((a.value for a in trace.events[0].attributes if a.key == 'time:timestamp'), None)
         time_end = next((x.value for x in trace.events[-1].attributes if x.key == 'time:timestamp'), None)
         duration = parser.parse(time_end) - parser.parse(time_start)
-        trace_duration_dict[next((x.value for x in trace.attributes if x.key == 'concept:name'))] = str(duration)
 
-    trace_duration_dict = {k: v for k, v in sorted(trace_duration_dict.items(), key=lambda item: item[1])}
-    return (list(trace_duration_dict.keys())[0], list(trace_duration_dict.values())[0]), \
-           (list(trace_duration_dict.keys())[-1], list(trace_duration_dict.values())[-1])
+        # write duration into dict
+        for d in trace_duration_dict:
+            if d['trace_name'] == trace_name:
+                d['duration'] = str(duration)
+
+    trace_duration_dict = sorted(trace_duration_dict, key=lambda x: x['duration'], reverse=True)
+
+    # write into a csv file for further usage in the webserver
+    csv_path = open('static/statistics/trace_durations.csv', 'w')
+    writer = csv.DictWriter(csv_path, fieldnames=trace_duration_dict[0].keys())
+    writer.writeheader()
+    for di in trace_duration_dict:
+        writer.writerow(di)
+
+    return trace_duration_dict
 
 
 def duration_of_events(path_to_xes_file):
@@ -58,8 +82,9 @@ def duration_of_events(path_to_xes_file):
 
 
 def main():
+    print('number of events: ' + str(num_events_total('log_data/L1.xes')))
     print('occurrences of all events: ' + str(num_events_total('log_data/L1.xes')))
-    print('max and min duration of traces: ' + str(get_durations_of_traces('log_data/billinstances.xes')))
+    print('max and min duration of traces: ' + str(get_durations_of_traces('log_data/L5.xes')))
 
 
 if __name__ == '__main__':

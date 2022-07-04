@@ -67,7 +67,7 @@ def parse_body(path_to_body_xml: string):
 
     # create Trace objects 
     for i in range(0, len(traces)):
-        trace_attrib = []
+        trace_attrib = []  # attributes of the trace traces[i]
         for j in event_list[i]:
             if len(j.attrib) > 0:
                 trace_attrib.append(j)
@@ -84,20 +84,70 @@ def parse_body(path_to_body_xml: string):
             # of the trace
             if e is None:
                 continue
-
             event_list_n.append(e)
+
+        # create map of all types of lifecycle transitions
+        life_cycle_types = event_list_n
+        life_cycle_types = set(map(lambda event:
+                               next((ev.value for ev in event.attributes if ev.key == 'lifecycle:transition'), None),
+                               life_cycle_types))
+
+        # handle life cycle transitions
+        event_list_n = handle_life_cycles(event_list_n, life_cycle_types)
 
         # if event list is empty, the trace is not considered
         if len(event_list_n) == 0:
             break
 
-        # TODO: check for all events in the trace whether they are complete before the trace ends and before the
-        #  following occurrence of the same event
         # convert elements of trace_attributes into Attribute objects and create trace object
         trace_attrib = [datastructure.Attribute(attr.get('key'), attr.get('value')) for attr in trace_attrib]
         traces[i] = datastructure.Trace(trace_attrib, event_list_n)
 
     return traces
+
+
+def parse_event(event) -> Union[datastructure.Event, None]:
+    """
+    event in this case is only a list of strings, with each string representing an attribute line. This method
+    converts the elements into Event object with the respective attributes
+    :param event: list of attribute lines in string format
+    :return: Event object or None, if event has no attributes
+    """
+    if len(event) == 0:
+        return None
+
+    attributes = []
+    has_name = False
+    for attr in event:
+        key = attr.attrib.get('key')
+        val = attr.attrib.get('value')
+        # TODO: lifecycle transition, remove if statement
+        # if 'lifecycle:transition' in key and 'start' in val:
+        #     return None
+        if 'concept:name' in key:
+            has_name = True
+        attributes.append(datastructure.Attribute(key, val))
+
+    # create Event object
+    if not has_name:
+        warnings.warn('event has no name, it will be ignored by the miner!')
+        return None
+    event = datastructure.Event(attributes)
+    return event
+
+
+def handle_life_cycles(event_list, life_cycle_types):
+    if len(life_cycle_types) == 1:
+        for event in event_list:
+            event.attributes.append(datastructure.Attribute('start', 'True'))
+    else:
+        for event in event_list:
+            lifecycle_transition = next((a.value for a in event.attributes if a.key == 'lifecycle:transition'), None)
+            if lifecycle_transition == 'start':
+                event.attributes.append(datastructure.Attribute('start', 'True'))
+            else:
+                event.attributes.append(datastructure.Attribute('start', 'False'))
+    return event_list
 
 
 def difference(lst1, lst2):
@@ -124,40 +174,10 @@ def difference(lst1, lst2):
     return result
 
 
-def parse_event(event) -> Union[datastructure.Event, None]:
-    """
-    event in this case is only a list of strings, with each string representing an attribute line. This method
-    converts the elements into Event object with the respective attributes
-    :param event: list of attribute lines in string format
-    :return: Event object or None, if event has no attributes
-    """
-    if len(event) == 0:
-        return None
-
-    attributes = []
-    has_name = False
-    for attr in event:
-        key = attr.attrib.get('key')
-        val = attr.attrib.get('value')
-        # TODO: lifecycle transition, remove if statement
-        if 'lifecycle:transition' in key and 'start' in val:
-            return None
-        if 'name' in key:
-            has_name = True
-        attributes.append(datastructure.Attribute(key, val))
-
-    # create Event object
-    if not has_name:
-        warnings.warn('event has no name, it will be ignored by the miner!')
-        return None
-    event = datastructure.Event(attributes)
-    return event
-
-
 def main():
-    (header, body) = prepare('log_data/running-example.xml')
+    (header, body) = prepare('log_data/L1.xes')
     traces = parse_body(body)
-    print(traces)
+    print(str(traces))
 
 
 if __name__ == "__main__":
