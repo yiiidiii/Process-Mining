@@ -87,7 +87,7 @@ def key(places_list: List[ds.Place] = None, transition_list: List[ds.MyTransitio
 def graphviz_net(path_to_xes):
     file_name = os.path.basename(path_to_xes)
     file_name = file_name.replace('.xes', '')
-    net = graphviz.Digraph('my Petri Net', filename=f'static/test_files/png_files/{file_name}', engine='neato')
+    net = graphviz.Digraph('my Petri Net', filename=f'static/test_files/png_files/{file_name}', engine='neato', format='svg')
 
     # preparation
     (header, body) = am.prepare(path_to_xes)
@@ -98,7 +98,6 @@ def graphviz_net(path_to_xes):
     step_4_5_relations = am.step_4_5(event_names_set, event_names_llist)
     step_6_places = am.step_6_create_places(step_4_5_relations, first, last)
     step_7_edges = am.step_7_create_edges(step_6_places)
-    # places = am.step_6_create_places(traces)
 
     # create places
     net.attr('node', shape='circle', fixedsize='true', width='0.7')
@@ -121,20 +120,20 @@ def graphviz_net(path_to_xes):
         else:
             net.edge(str(trans_legend.get(str(e.source))), str(pl_legend.get(str(e.direction))))
 
+    # generate graph label
     label = ''
     for pl in pl_legend.keys():
-        label = label + f'{str(pl_legend.get(pl))}: {str(pl)}, \t'
+        label = label + f'{str(pl_legend.get(pl)) :<}: {str(pl)}, \n'
     label = label + '\n'
     for tr in trans_legend.keys():
-        label = label + f'{str(trans_legend.get(tr))}: {str(tr)}, \t'
+        label = label + f'{str(trans_legend.get(tr))}: {str(tr)}, \n'
     net.attr(overlap='false', fontsize='11', label=label)
+
     return net
 
 
 def main():
-    # net = create_net('log_data/L1.xes')
-    # net.draw('petri_net_vis/my_net.png', place_attr=draw_place, trans_attr=draw_transition)
-    net = graphviz_net('log_data/flyerinstances.xes')
+    net = graphviz_net('log_data/running-example.xes')
     net.view()
 
 
