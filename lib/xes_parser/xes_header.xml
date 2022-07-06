@@ -1,0 +1,26 @@
+<log xmlns="http://www.xes-standard.org/" xes.version="2.0" xes.features="nested-attributes">
+  <extension name="Time" prefix="time" uri="http://www.xes-standard.org/time.xesext"/>
+  <extension name="Concept" prefix="concept" uri="http://www.xes-standard.org/concept.xesext"/>
+  <extension name="Organizational" prefix="org" uri="http://www.xes-standard.org/org.xesext"/>
+  <extension name="Lifecycle" prefix="lifecycle" uri="http://www.xes-standard.org/lifecycle.xesext"/>
+  <extension name="cpee" uri="http://cpee.org/cpee.xesext"/>
+  <global scope="trace">
+    <string concept:name="__INVALID__"/>
+    <string cpee:name="__INVALID__"/>
+  </global>
+  <global scope="event">
+    <string concept:instance="-1"/>
+    <string concept:name="__INVALID__"/>
+    <string concept:endpoint=""/>
+    <string id:id=""/>
+    <string cpee:uuid=""/>
+    <string lifecycle:transition="complete"/>
+    <string cpee:lifecycle:transition="activity/calling"/>
+    <string time:timestamp=""/>
+  </global>
+  <classifier name="Data" keys="data_send data_received data_changed data_values"/>
+  <classifier name="Data_Received" keys="data_receiver"/>
+  <classifier name="Data_Send" keys="data_send"/>
+  <classifier name="Data_Changed" keys="data_changer"/>
+  <classifier name="Data_Values" keys="data_values"/>
+</log>

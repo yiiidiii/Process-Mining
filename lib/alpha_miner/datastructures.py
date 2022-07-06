@@ -1,7 +1,7 @@
 import string
 from typing import List, Union
-import xes_parser.main as xp
-import alpha_miner.main as am
+import xes_parser.parser as xp
+import alpha_miner.miner as am
 
 
 class MyTransition:

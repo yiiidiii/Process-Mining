@@ -1,7 +1,7 @@
 import os.path
 from typing import List
 
-import alpha_miner.main as am
+import alpha_miner.miner as am
 import alpha_miner.datastructures as ds
 import snakes.plugins
 import graphviz
@@ -87,7 +87,7 @@ def key(places_list: List[ds.Place] = None, transition_list: List[ds.MyTransitio
 def graphviz_net(path_to_xes):
     file_name = os.path.basename(path_to_xes)
     file_name = file_name.replace('.xes', '')
-    net = graphviz.Digraph('my Petri Net', filename=f'static/test_files/png_files/{file_name}', engine='neato', format='svg')
+    net = graphviz.Digraph('my Petri Net', filename=f'static/test_files/png_files/{file_name}', engine='neato', format='pdf')
 
     # preparation
     (header, body) = am.prepare(path_to_xes)

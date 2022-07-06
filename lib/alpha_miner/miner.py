@@ -1,5 +1,5 @@
 from xes_parser.datastructure import *
-from xes_parser.main import *
+from xes_parser.parser import *
 import warnings
 import alpha_miner.datastructures as ds
 

@@ -1,17 +1,20 @@
-from flask import Flask, render_template, send_file
-import alpha_miner
-from flask_wtf import FlaskForm
-from wtforms import FileField, SubmitField
-import petri_net_vis.main
-from werkzeug.utils import secure_filename
-import os
-from wtforms.validators import InputRequired
 import matplotlib.pyplot as plt
 import pandas as pd
+import os
+from flask import Flask, render_template, send_file
+from flask_wtf import FlaskForm
+from wtforms import FileField, SubmitField
+from werkzeug.utils import secure_filename
+from wtforms.validators import InputRequired
 
-app = Flask(__name__)
+import __init__
+import petri_net_vis.net_vis
+
+
+
+app = Flask(__name__, template_folder="../templates/", static_folder="../static")
 app.config['SECRET_KEY'] = 'supersecretkey'
-app.config['UPLOAD_FOLDER'] = 'static/upload_files'
+app.config['UPLOAD_FOLDER'] = 'static/uplpaded_files'
 
 
 class UploadFileForm(FlaskForm):
@@ -25,13 +28,14 @@ def home():
     form = UploadFileForm()
     if form.validate_on_submit():
         file = form.file.data  # first grab the file
-        fpath = os.path.join(os.path.abspath(os.path.dirname(__file__)), app.config['UPLOAD_FOLDER'],
-                             secure_filename(file.filename))
+        fpath = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(file.filename))
         file.save(fpath)  # then save the file
 
-        net = petri_net_vis.main.graphviz_net(fpath)
-        net.render(os.path.join("static/upload_nets", secure_filename(file.filename)), cleanup=True, format='png')
-        return render_template('user_image.html', user_image=os.path.join("static/upload_nets", secure_filename(file.filename)) + '.png')
+        net = petri_net_vis.net_vis.graphviz_net(fpath)
+        file.filename = file.filename.replace('.xes', '')
+        net.render(os.path.join("static/uploaded_nets", secure_filename(file.filename)), cleanup=True, format='svg')
+        return render_template('user_image.html', user_image=os.path.join("static/uploaded_nets", 
+                                secure_filename(file.filename)) + '.svg')
     return render_template('index.html', form=form)
 
 
@@ -131,7 +135,7 @@ def running_example():
 
 
 def visualize_net(path_xes_file, path_net_file):
-    net = petri_net_vis.main.graphviz_net(f'{path_xes_file}')
+    net = petri_net_vis.net_vis.graphviz_net(f'{path_xes_file}')
 
     net.render(f'{path_net_file}', cleanup=True, format='svg')
     return render_template('images_test_files.html', user_image=f'{path_net_file}' + '.svg')

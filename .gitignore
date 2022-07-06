@@ -1,2 +1,6 @@
 **/.idea/
 **/.vscode/
+**/venv/
+**/static/uploaded_nets
+**/static/uploaded_files
+**/static/test_files/svg_files

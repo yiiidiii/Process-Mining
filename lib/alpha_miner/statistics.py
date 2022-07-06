@@ -1,7 +1,7 @@
 import datetime
 import csv
-import xes_parser.main as xp
-import alpha_miner.main as am
+import lib.xes_parser.parser as xp
+import lib.alpha_miner.miner as am
 from dateutil import parser
 
 

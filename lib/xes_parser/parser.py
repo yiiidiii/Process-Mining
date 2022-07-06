@@ -2,7 +2,7 @@ import string
 import xml.etree.ElementTree as ET
 from typing import Union
 import warnings
-from dateutil import parser
+# from dateutil import parser
 import numpy as np
 
 from xes_parser import datastructure
@@ -20,8 +20,8 @@ def prepare(path_to_xes_file: string):
     lines = file.readlines()
     file.close()
 
-    path_header = 'xes_parser/xes_header.xml'
-    path_body = 'xes_parser/xes_body.xml'
+    path_header = 'lib/xes_parser/xes_header.xml'
+    path_body = 'lib/xes_parser/xes_body.xml'
     new_file = open(path_header, 'w')
     xes_copy = open(path_body, 'w')
     xes_copy.write('<log>\n')
