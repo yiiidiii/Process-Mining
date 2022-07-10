@@ -5,12 +5,13 @@ import warnings
 # from dateutil import parser
 import numpy as np
 
+import run.__init__
 from xes_parser import datastructure
 
 
 def prepare(path_to_xes_file: string):
     """
-    converts xes file into two xml-header and xml-body upload_files.
+    converts xes file into two xml-header and xml-body uploaded_files.
     :path_tp_xes_file: path to the xes file that should be converted (string)
     :return: tuple of path to the header.xml and body.xml that the xes file was split into
     """
@@ -20,8 +21,8 @@ def prepare(path_to_xes_file: string):
     lines = file.readlines()
     file.close()
 
-    path_header = 'lib/xes_parser/xes_header.xml'
-    path_body = 'lib/xes_parser/xes_body.xml'
+    path_header = 'xes_header.xml'
+    path_body = 'xes_body.xml'
     new_file = open(path_header, 'w')
     xes_copy = open(path_body, 'w')
     xes_copy.write('<log>\n')

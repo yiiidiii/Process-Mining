@@ -2,10 +2,65 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/test_image_page.css" type="text/css">
     <title>Your Petri Net</title>
 </head>
 <body>
-    <h1>This is the Petri Net generated with the alpha miner form your uploaded xes file</h1>
-    <img src="{{ user_image }}" alt="User Image">
+
+    <header>
+        <h1>Petri Net from uploaded XES file</h1>
+    </header>
+
+    <div class="col-container">
+
+        <div class="col">
+            <img src="{{ user_image }}" alt="User Image">
+        </div>
+
+
+        <div class="col">
+            <h3>Legend for petri net</h3>
+
+            <table id="places_table">
+                <thead>
+                    <tr>
+                      <th id="th_value">Place</th>
+                      <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for key, value in place_legend.items() %}
+                    <tr>
+                       <td> {{ value }} </td>
+                       <td> {{ key }} </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <table id="trans_table">
+                <thead>
+                    <tr>
+                      <th id="th_value">Transition</th>
+                      <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for key, value in trans_legend.items() %}
+                    <tr>
+                       <td> {{ value }} </td>
+                       <td> {{ key }} </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <!-- </section> -->
+    </div>
+
+
+    <div class="footer">
+        <h2>Statistics</h2>
+    </div>
 </body>
 </html>

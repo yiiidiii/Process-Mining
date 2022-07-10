@@ -108,12 +108,12 @@ def graphviz_net(path_to_xes):
     # create transitions
     obj_transitions = [ds.MyTransition(t) for t in am.step_1_get_event_names_as_set(traces)]
     trans_legend = key(places_list=None, transition_list=obj_transitions)
-    net.attr('node', shape='box', style='filled', fillcolor='bisque')
+    net.attr('node', shape='box', style='filled', fillcolor='lightpink2')
     for t in trans_legend.values():
         net.node(str(t))
 
     # create edges
-    net.attr('edge', arrowsize='0.7', len='10')
+    net.attr('edge', arrowsize='0.7', len='1')
     for e in step_7_edges:
         if type(e.source) is ds.Place:
             net.edge(str(pl_legend.get(str(e.source))), str(trans_legend.get(str(e.direction))))
@@ -127,13 +127,13 @@ def graphviz_net(path_to_xes):
     label = label + '\n'
     for tr in trans_legend.keys():
         label = label + f'{str(trans_legend.get(tr))}: {str(tr)}, \n'
-    net.attr(overlap='false', fontsize='11', label=label)
+    net.attr(overlap='false', fontsize='11')
 
-    return net
+    return net, pl_legend, trans_legend
 
 
 def main():
-    net = graphviz_net('log_data/running-example.xes')
+    net, pl, trans = graphviz_net('log_data/running-example.xes')
     net.view()
 
 

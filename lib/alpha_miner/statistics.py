@@ -38,7 +38,7 @@ def num_events_total(path_to_xes_file):
     for di in events_occ_list:
         writer.writerow(di)
 
-    return events_occ_list
+    # return events_occ_list
 
 
 def get_durations_of_traces(path_to_xes_file):
@@ -73,7 +73,7 @@ def get_durations_of_traces(path_to_xes_file):
     for di in trace_duration_dict:
         writer.writerow(di)
 
-    return trace_duration_dict
+    # return trace_duration_dict
 
 
 def duration_of_events(path_to_xes_file):

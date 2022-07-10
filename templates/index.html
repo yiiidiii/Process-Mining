@@ -8,10 +8,16 @@
     <title>Home</title>
 
 </head>
-<body>
-    <h1>Main page of the alpha miner</h1>
 
-    <h2>XES file upload</h2>
+
+<body>
+
+<header>
+    <h1>Main page of the Alpha Miner</h1>
+</header>
+
+<section id="upload_column">
+    <h2 id="upload">Petri Net from uploaded XES file</h2>
 
     <form method="POST" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
@@ -19,40 +25,30 @@
         {{ form.submit() }}
     </form>
 
-    <h2>petri nets from test XES files</h2>
-    <p>
+</section>
+
+<section  id="test_column">
+    <h2 id="test">Petri nets from test XES files</h2>
+
+    <h3>Initial Testing</h3>
         <a href="{{ url_for('l1') }}">Petri net for L1</a>
-    </p>
-    <p>
-        <a href="{{ url_for('l2') }}">Petri net for L2</a>
-    </p>
-    <p>
-        <a href="{{ url_for('l3') }}">Petri net for L3</a>
-    </p>
-    <p>
-        <a href="{{ url_for('l4') }}">Petri net for L4</a>
-    </p>
-    <p>
         <a href="{{ url_for('l5') }}">Petri net for L5</a>
-    </p>
-    <p>
+
+    <h3>Further Testing</h3>
+        <a href="{{ url_for('l2') }}">Petri net for L2</a>
+        <a href="{{ url_for('l3') }}">Petri net for L3</a>
+        <a href="{{ url_for('l4') }}">Petri net for L4</a>
+        <a id="long" href="{{ url_for('running_example') }}">Petri net for running-example</a>
+        <a id="long" href="{{ url_for('posterinstances') }}">Petri net for posterinstances</a>
+        <a id="long" href="{{ url_for('billinstances') }}">Petri net for billinstances</a>
+
+
+    <h3>Testing Limitations</h3>
         <a href="{{ url_for('l6') }}">Petri net for L6</a>
-    </p>
-    <p>
         <a href="{{ url_for('l7') }}">Petri net for L7</a>
-    </p>
-    <p>
-        <a href="{{ url_for('billinstances') }}">Petri net for billinstances</a>
-    </p>
-    <p>
-        <a href="{{ url_for('flyerinstances') }}">Petri net for flyerinstances</a>
-    </p>
-    <p>
-        <a href="{{ url_for('posterinstances') }}">Petri net for posterinstances</a>
-    </p>
-    <p>
-        <a href="{{ url_for('running_example') }}">Petri net for running-example</a>
-    </p>
+        <a id="long" href="{{ url_for('flyerinstances') }}">Petri net for flyerinstances</a>
+
+</section>
 
 </body>
 </html>

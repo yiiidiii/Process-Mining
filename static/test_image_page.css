@@ -1,0 +1,105 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* -------------------------- start layout ---------------------------- */
+header {
+  background-color: rgba(163, 82, 82, 0.78);
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+#image_section {
+  float: left;
+  padding-top: 50px;
+  width: 50%;
+  background-color: white;
+}
+
+#legend_section {
+  float: left;
+  padding-top: 50px;
+  width: 50%;
+  background-color: white;
+}
+
+.footer {
+  float: bottom;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+.col-container {
+  display: table; /* Make the container element behave like a table */
+  width: 100%; /* Set full-width to expand the whole page */
+  text-align: center;
+}
+
+.col {
+  float: left;
+  width: 50%;
+  padding-top: 50px;
+  padding-left: 50px;
+}
+/* ------------------------------ end layout ------------------------------ */
+
+
+h2 {
+  color: white;
+  alignment: center;
+  padding-left: 10px;
+  padding-top: 20px;
+  padding-bottom: 5px;
+
+  font-family: sans-serif;
+  background-color: rgba(163, 82, 82, 0.78);
+}
+
+h3 {
+  font-size: 25px;
+  text-align: left;
+  padding-left: 50px;
+}
+
+#places_table {
+  padding-left: 50px;
+  padding-bottom: 50px;
+  float: left;
+  display: inline-block;
+}
+
+#trans_table {
+  display: inline-block;
+  float: left;
+  padding-left: 50px;
+  padding-bottom: 50px;
+}
+
+td {
+  height: 30px;
+  vertical-align: center;
+  padding: 10px;
+  border-bottom: 1px solid rgba(134, 85, 88, 0.55);
+}
+th {
+  text-align: center;
+  background-color: rgba(163, 82, 82, 0.78);
+  color: white;
+  padding: 15px;
+}
+
+tr:hover {
+  background-color: rgba(190,108,114,0.94);
+  color: white;
+}
+
+.statistics {
+  padding-left: 50px;
+  font-size: 18px;
+}

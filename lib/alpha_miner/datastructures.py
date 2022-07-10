@@ -41,7 +41,7 @@ class Place:
         self._place_id = Place._place_id
         Place._place_id += 1
         # for alpha miner
-        if (len(in_list) != 0 and all(isinstance(el, str) for el in in_list)) or\
+        if (len(in_list) != 0 and all(isinstance(el, str) for el in in_list)) or \
                 (len(out_list) != 0 and all(isinstance(el, str) for el in out_list)):
             self.in_list = list(sorted(in_list))
             self.out_list = list(sorted(out_list))
@@ -81,9 +81,6 @@ class Place:
             if e not in other.out_list:
                 return False
         return True
-
-    # def __hash__(self):
-    #     return hash(zip((sort(self.in_list), sort(self.out_list))))
 
 
 class Edge:

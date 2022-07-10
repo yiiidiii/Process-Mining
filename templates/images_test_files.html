@@ -2,39 +2,80 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="../static/test_image_page.css" type="text/css">
         <title>Petri Net Test files</title>
     </head>
-    <style>
-    svg rect {
-        fill: orange;
-    }
-
-    svg text {
-        fill:white;
-        font: 10px sans-serif;
-        text-anchor: end;
-    }
-    </style>
 
     <body>
 
-    <h2>This is the petri net generated from the test xes file</h2>
-        <img src="{{ user_image }}" alt="User Image">
+    <header>
+        <h1>Petri Net generated from test XES file</h1>
+    </header>
 
-    <h2>Statistics</h2>
-    <svg class="chart" width="420" height="120">
-        <g transform="translate(0,0)">
-            <rect width="50" height="19"></rect>
-            <text x="47" y="9.5" dy=".35em">5</text>
-        </g>
-        <g transform="translate(0,20)">
-            <rect width="100" height="19"></rect>
-            <text x="97" y="9.5" dy=".35em">10</text>
-        </g>
-        <g transform="translate(0,40)">
-            <rect width="120" height="19"></rect>
-            <text x="117" y="9.5" dy=".35em">12</text>
-        </g>
-    </svg>
+    <div class="col-container">
+
+        <!-- <section id="image_section"> -->
+        <div class="col">
+            <img src="{{ user_image }}" alt="User Image">
+        </div>
+        <!-- </section> -->
+
+        <!--
+        <section id="legend_section" class="clearfix"> -->
+        <div class="col">
+            <h3>Legend for petri net</h3>
+
+            <table id="places_table">
+                <thead>
+                    <tr>
+                      <th id="th_value">Place</th>
+                      <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for key, value in place_legend.items() %}
+                    <tr>
+                       <td> {{ value }} </td>
+                       <td> {{ key }} </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <table id="trans_table">
+                <thead>
+                    <tr>
+                      <th id="th_value">Transition</th>
+                      <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for key, value in trans_legend.items() %}
+                    <tr>
+                       <td> {{ value }} </td>
+                       <td> {{ key }} </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <!-- </section> -->
+    </div>
+
+
+    <br>
+
+
+    <h2 class="footer">Statistics</h2>
+
+    <div class="statistics">
+        <p> Total Number of traces: {{ num_traces }} </p>
+    </div>
+
+    <!-- <div id="chart"></div> -->
+    <img src="{{ event_occ }}" alt="event occurrences as bar chart">
+    <img src="{{ trace_dur }}" alt="duration of all traces">
+
+
     </body>
 </html>

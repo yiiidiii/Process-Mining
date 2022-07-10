@@ -1,3 +1,6 @@
+from typing import List
+
+import run.__init__
 from xes_parser.datastructure import *
 from xes_parser.parser import *
 import warnings
@@ -479,7 +482,9 @@ def step_7_create_edges(places_list):
     return edges
 
 
-def alpha_miner(traces):
+def alpha_miner(path_to_xes):
+    (header, body) = prepare(path_to_xes)
+    traces = parse_body(body)
     event_names_llist = filtered_traces_list(traces)
 
     event_names_set = step_1_get_event_names_as_set(traces)
@@ -492,23 +497,23 @@ def alpha_miner(traces):
     step_6_places = step_6_create_places(step_4_5_relations, first, last)
     step_7_edges = step_7_create_edges(step_6_places)
 
-    print('first: ' + str(first))
+    """print('first: ' + str(first))
     print('last: ' + str(last))
     print('directly follows: ' + str(directly_follows))
     print('causal: ' + str(causal))
     print('unrelated: ' + str(unrelated))
-    print('step 4, 5 relations' + str(step_4_5_relations))
+    print('step 4, 5 relations' + str(step_4_5_relations))"""
 
     for p in step_6_places:
         print(str(p))
     for e in step_7_edges:
         print(str(e))
 
+    return event_names_set, step_6_places, step_7_edges
+
 
 def main():
-    (header, body) = prepare('log_data/L1.xes')
-    traces = parse_body(body)
-    alpha_miner(traces)
+    alpha_miner('log_data/L1.xes')
 
 
 if __name__ == '__main__':
