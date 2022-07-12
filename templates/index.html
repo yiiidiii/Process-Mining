@@ -16,8 +16,27 @@
     <h1>Main page of the Alpha Miner</h1>
 </header>
 
+<h3 style="padding-left: 50px"> The Alpha Miner </h3>
+<p class="description">
+    The α-algorithm or α-miner is an algorithm used in process mining, aimed at reconstructing causality from a set of sequences of events.
+    It was first put forward by van der Aalst, Weijters and Măruşter. The goal of Alpha miner is to convert the event log into a workflow-net based on the relations
+    between various activities in the event log. An event log is a multi-set of traces, and a trace is a sequence of activity names.
+<br>
+    Alpha miner was the first process discovery algorithm ever proposed, and it gives a good overview of the aim of process discovery and how various activities
+    within the process are executed. Alpha miner was also the basis for the development of many other process mining techniques such as heuristic miner, genetic
+    mining was developed based on the idea alpha miner is built on.
+</p>
+<p class="description">
+    Taken from <a href="https://en.wikipedia.org/wiki/Alpha_algorithm" id="link_page">Wikipedia</a>
+</p>
+
 <section id="upload_column">
+
     <h2 id="upload">Petri Net from uploaded XES file</h2>
+    <p style="font-size: 18px; padding: 20px;">
+        Here, you can upload a XES file to generate the petri net and its statistics.
+        Note that an incorrect XES file will end up in an error.
+    </p>
 
     <form method="POST" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
@@ -30,23 +49,29 @@
 <section  id="test_column">
     <h2 id="test">Petri nets from test XES files</h2>
 
+    <p style="font-size: 18px; padding: 20px;">
+        By clicking on any of the buttons, the respective petri net is generated with the alpha miner and you are redirected to
+        another page where the graph and statistics regarding the xes file is shown. The XES files are taken from
+        <a href="https://lehre.bpm.in.tum.de/~pm-prak/datasets/" id="link_page">here</a>.
+    </p>
+
     <h3>Initial Testing</h3>
-        <a href="{{ url_for('l1') }}">Petri net for L1</a>
-        <a href="{{ url_for('l5') }}">Petri net for L5</a>
+        <a href="{{ url_for('l1') }}" class="button">Petri net for L1</a>
+        <a href="{{ url_for('l5') }}" class="button">Petri net for L5</a>
 
     <h3>Further Testing</h3>
-        <a href="{{ url_for('l2') }}">Petri net for L2</a>
-        <a href="{{ url_for('l3') }}">Petri net for L3</a>
-        <a href="{{ url_for('l4') }}">Petri net for L4</a>
-        <a id="long" href="{{ url_for('running_example') }}">Petri net for running-example</a>
-        <a id="long" href="{{ url_for('posterinstances') }}">Petri net for posterinstances</a>
-        <a id="long" href="{{ url_for('billinstances') }}">Petri net for billinstances</a>
+        <a href="{{ url_for('l2') }}" class="button">Petri net for L2</a>
+        <a href="{{ url_for('l3') }}" class="button">Petri net for L3</a>
+        <a href="{{ url_for('l4') }}" class="button">Petri net for L4</a>
+        <a id="long" href="{{ url_for('running_example') }}" class="button">Petri net for running-example</a>
+        <a id="long" href="{{ url_for('posterinstances') }}" class="button">Petri net for posterinstances</a>
+        <a id="long" href="{{ url_for('billinstances') }}" class="button">Petri net for billinstances</a>
 
 
     <h3>Testing Limitations</h3>
-        <a href="{{ url_for('l6') }}">Petri net for L6</a>
-        <a href="{{ url_for('l7') }}">Petri net for L7</a>
-        <a id="long" href="{{ url_for('flyerinstances') }}">Petri net for flyerinstances</a>
+        <a href="{{ url_for('l6') }}" class="button">Petri net for L6</a>
+        <a href="{{ url_for('l7') }}" class="button">Petri net for L7</a>
+        <a id="long" href="{{ url_for('flyerinstances') }}" class="button">Petri net for flyerinstances</a>
 
 </section>
 

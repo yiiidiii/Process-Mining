@@ -8,6 +8,7 @@ body {
 header {
   background-color: rgba(163, 82, 82, 0.78);
   padding: 30px;
+  margin-bottom: 50px;
   text-align: center;
   font-size: 35px;
   color: white;
@@ -27,6 +28,12 @@ header {
   padding: 20px;
 }
 
+.description {
+  padding-right: 50px;
+  padding-left: 50px;
+  margin: 20px;
+  font-size: 18px;
+}
 
 h1 {
   color: white;
@@ -50,7 +57,7 @@ h2 {
 }
 
 
-a:link, a:visited {
+.button:link, .button:visited {
   background-color: white;
   color: black;
   border: 2px solid rgba(190, 108, 114, 0.94);
@@ -61,7 +68,7 @@ a:link, a:visited {
   margin: 5px 10px;
   border-radius: 10px;
 }
-a:hover, a:active {
+.button:hover, .button:active {
   background-color: rgba(190, 108, 114, 0.94);
   color: white;
   border: none;
@@ -71,10 +78,10 @@ a:hover, a:active {
     width: 300px;
 }
 
-ul {
-  list-style-type: none;
-  margin-top: 10px;
+p {
+  line-height: 25px;
 }
+
 
 form {
   margin-top: 20px;
@@ -88,9 +95,14 @@ form {
   padding-left: 20px;
 }
 
+#link_page {
+  text-underline: rgba(190,108,114,0.94);
+  color: rgba(190,108,114,0.94);
+}
+
 /* TODO: style the upload form */
 label[for="files"]{
-    background: #FF7B47;
+    background: rgba(133, 93, 106, 0.69);
     padding: 10px;
     color: #fff;
     font-family: sans-serif;

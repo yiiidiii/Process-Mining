@@ -52,17 +52,21 @@ def get_durations_of_traces(path_to_xes_file):
 
     trace_duration_dict = [{'trace_name': next((x.value for x in t.attributes if x.key == 'concept:name'), None),
                             'duration': '0'} for t in traces]
+    average_duration = datetime.timedelta(0)
     for trace in traces:
         # here, events are not filtered out because of lifecycle transitions, because the correct duration is until when an event is 'complete'
         trace_name = next((a.value for a in trace.attributes if a.key == 'concept:name'), None)
         time_start = next((a.value for a in trace.events[0].attributes if a.key == 'time:timestamp'), None)
         time_end = next((x.value for x in trace.events[-1].attributes if x.key == 'time:timestamp'), None)
         duration = parser.parse(time_end) - parser.parse(time_start)
+        average_duration += duration
 
         # write duration into dict
         for d in trace_duration_dict:
             if d['trace_name'] == trace_name:
                 d['duration'] = str(duration)
+
+    average_duration = average_duration / len(trace_duration_dict)
 
     trace_duration_dict = sorted(trace_duration_dict, key=lambda x: x['duration'], reverse=True)
 
@@ -73,18 +77,30 @@ def get_durations_of_traces(path_to_xes_file):
     for di in trace_duration_dict:
         writer.writerow(di)
 
-    # return trace_duration_dict
+    return format_duration(average_duration)
 
 
-def duration_of_events(path_to_xes_file):
-    (header, body) = xp.prepare(path_to_xes_file)
-    traces = xp.parse_body(body)
+def format_duration(duration):
+    """
+    formats the duration to HH:MM:SS (hours:minutes:seconds) to be consistent with the barchart
+    :param duration: the duration as Timedelta object
+    :return: correct format of duration as string
+    """
+
+    total_seconds = duration.seconds
+
+    days = duration.days
+    hours = (total_seconds // 3600) + (days * 24)
+    minutes = (total_seconds % 3600) // 60
+    seconds = total_seconds % 60
+
+    return f'{hours:d}:{minutes:02d}:{seconds:02d}'
 
 
 def main():
-    print('number of events: ' + str(num_events_total('log_data/L1.xes')))
-    print('occurrences of all events: ' + str(num_events_total('log_data/L1.xes')))
-    print('max and min duration of traces: ' + str(get_durations_of_traces('log_data/L5.xes')))
+    # print('number of events: ' + str(num_events_total('log_data/L1.xes')))
+    # print('occurrences of all events: ' + str(num_events_total('log_data/L1.xes')))
+    print('max and min duration of traces: ' + str(get_durations_of_traces('log_data/flyerinstances.xes')))
 
 
 if __name__ == '__main__':

@@ -1,6 +1,7 @@
 import os.path
 from typing import List
 
+import run.__init__
 import alpha_miner.miner as am
 import alpha_miner.datastructures as ds
 import snakes.plugins
@@ -16,55 +17,7 @@ from nets import (  # nets from loading plugins, found at runtime
 )
 
 
-def create_net(path_to_xes):
-    net = PetriNet('PetriNet')
-
-    # create places
-    (header, body) = am.prepare(path_to_xes)
-    traces = am.parse_body(body)
-    places = am.step_6_create_places(traces)
-
-    for place in places:
-        p = Place(place.name)
-        net.add_place(p)
-
-    # create transitions
-    transitions = am.step_1_get_event_names_as_set(traces)
-    for transition in transitions:
-        t = Transition(str(transition))
-        net.add_transition(t)
-
-    # connect places with transitions
-    edges = am.step_7_create_edges(traces)
-    for edge in edges:
-        if type(edge.source) is ds.Place:
-            net.add_input(str(edge.source), str(edge.direction), Value(1))
-        else:
-            net.add_output(str(edge.direction), str(edge.source), Value(1))
-
-    """net.add_input('1', 't1', Variable('x'))
-    net.add_input('1', 't2', Value(1))
-    net.add_output('2', 't1', Value(2))
-    net.add_input('3', 't2', Value(1))
-    net.add_output('2', 't2', Value(1))
-    net.add_output('3', 't1', Value(2))"""
-
-    return net
-
-
-def draw_place(place, attr):
-    attr['label'] = place.name.upper()
-    attr['color'] = '#FA6D00'
-
-
-def draw_transition(trans, attr):
-    if str(trans.guard) == 'True':
-        attr['label'] = trans.name
-    else:
-        attr['label'] = '%s\n%s' % (trans.name, trans.guard)
-
-
-# --------------------- GRAPHVIZ ---------------------- #
+# --------------------- GRAPHVIZ ----------------------
 
 def key(places_list: List[ds.Place] = None, transition_list: List[ds.MyTransition] = None):
     """
@@ -100,7 +53,7 @@ def graphviz_net(path_to_xes):
     step_7_edges = am.step_7_create_edges(step_6_places)
 
     # create places
-    net.attr('node', shape='circle', fixedsize='true', width='0.7')
+    net.attr('node', shape='circle', fixedsize='true', width='0.7', margin='1')
     pl_legend = key(step_6_places, transition_list=None)
     for pl in pl_legend.values():
         net.node(str(pl))
@@ -108,7 +61,7 @@ def graphviz_net(path_to_xes):
     # create transitions
     obj_transitions = [ds.MyTransition(t) for t in am.step_1_get_event_names_as_set(traces)]
     trans_legend = key(places_list=None, transition_list=obj_transitions)
-    net.attr('node', shape='box', style='filled', fillcolor='lightpink2')
+    net.attr('node', shape='box', style='filled', fillcolor='lightpink2', margin='1')
     for t in trans_legend.values():
         net.node(str(t))
 
@@ -121,14 +74,19 @@ def graphviz_net(path_to_xes):
             net.edge(str(trans_legend.get(str(e.source))), str(pl_legend.get(str(e.direction))))
 
     # generate graph label
-    label = ''
+    label1 = f'petri net generated from file {file_name}.xes'
+    label2 = f'{label1}\n'
     for pl in pl_legend.keys():
-        label = label + f'{str(pl_legend.get(pl)) :<}: {str(pl)}, \n'
-    label = label + '\n'
+        label2 = label2 + f'{str(pl_legend.get(pl)) :<}: {str(pl)}, \n'
+    label2 = label2 + '\n'
     for tr in trans_legend.keys():
-        label = label + f'{str(trans_legend.get(tr))}: {str(tr)}, \n'
-    net.attr(overlap='false', fontsize='11')
+        label2 = label2 + f'{str(trans_legend.get(tr))}: {str(tr)}, \n'
 
+    net.attr(overlap='scale', fontsize='11', label=label2)
+    net.render(f'static/test_files/svg_files/petri_net', cleanup=True, format='pdf')
+    # net.view()
+
+    net.attr(overlap='scale', fontsize='11', label=label1)
     return net, pl_legend, trans_legend
 
 

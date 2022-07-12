@@ -59,8 +59,28 @@
     </div>
 
 
-    <div class="footer">
-        <h2>Statistics</h2>
+    <h2 class="footer">Statistics</h2>
+
+    <div class="col-container">
+        <img src="{{ event_occ }}" alt="event occurrences as bar chart">
     </div>
+    <div class="statistics">
+        This bar chart shows the total occurrence of each event, sorted in ascending order.
+        The x-axis displays the events' names, the y-axis their occurrences.
+    </div>
+
+    <div class="col-container">
+        <img src="{{ trace_dur }}" alt="duration of all traces">
+    </div>
+    <div class="statistics">
+        <p> This bar chart shows the duration of each trace. If there are more than 14 traces in the log file, only the first and the last seven traces
+        are displayed, which are the traces that have the shortest and longest duration respectively. <br>
+        The x-axis shows the trace names/ids and the y-axis their duration. The format of the duration is given by HH:MM:SS (hours:minutes:seconds). <br>
+        To underline the contrast between the traces with the shortest and longest duration,
+        the y-axis could possibly begin at a higher value than 0. </p>
+        <p> <b>Total Number of traces:</b> {{ num_traces }} </p>
+        <p> <b> Mean duration of traces:</b> {{ mean_duration }} </p>
+    </div>
+
 </body>
 </html>
