@@ -1,7 +1,6 @@
 import os.path
 from typing import List
 
-import run.__init__
 import alpha_miner.miner as am
 import alpha_miner.datastructures as ds
 import snakes.plugins

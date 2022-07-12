@@ -5,7 +5,6 @@ import warnings
 # from dateutil import parser
 import numpy as np
 
-import run.__init__
 from xes_parser import datastructure
 
 

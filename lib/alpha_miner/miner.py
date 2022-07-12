@@ -1,6 +1,5 @@
 from typing import List
 
-import run.__init__
 from xes_parser.datastructure import *
 from xes_parser.parser import *
 import warnings
