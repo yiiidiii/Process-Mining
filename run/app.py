@@ -5,7 +5,7 @@ import matplotlib.pyplot as pyplot
 import matplotlib.cbook as cbook
 import numpy as np
 import matplotlib.dates as mdates
-from flask import Flask, render_template, send_file
+from flask import Flask, render_template, send_file, Blueprint
 from flask_wtf import FlaskForm
 from wtforms import FileField, SubmitField
 from werkzeug.utils import secure_filename
@@ -15,11 +15,17 @@ import textwrap
 
 import __init__
 import petri_net_vis.net_vis
-import lib.alpha_miner.statistics as stat
+import alpha_miner.statistics as stat
 
-app = Flask(__name__, template_folder="../templates/", static_folder="../static")
+file_dir = os.path.dirname(
+    os.path.abspath(__file__)
+)
+
+app = Flask(__name__, template_folder=os.path.join(file_dir, "..", "templates"), static_folder=os.path.join(file_dir, "..", "static"))
+print(f'The template folder is: {app.template_folder}, and the static_folder is: {app.static_folder} :-)')
 app.config['SECRET_KEY'] = 'supersecretkey'
 app.config['UPLOAD_FOLDER'] = 'static/uploaded_files'
+app.config["APPLICATION_ROOT"] = "/ports/8006"
 
 
 class UploadFileForm(FlaskForm):
@@ -28,7 +34,6 @@ class UploadFileForm(FlaskForm):
 
 
 @app.route('/', methods=['GET', 'POST'])
-@app.route('/home', methods=['GET', 'POST'])
 def home():
     form = UploadFileForm()
     if form.validate_on_submit():
@@ -73,12 +78,15 @@ def return_files_pdf():
         return str(e)
 
 
-@app.route('/l1')
+@app.route('/l1', methods=['POST', 'GET'])
 def l1():
     PATH_XES = 'static/test_files/xes_files/L1.xes'
     PATH_NET = 'static/test_files/svg_files/petri_net'
+    print("Sup bra")
 
     return visualize_net(PATH_XES, PATH_NET)
+
+app.jinja_env.globals.update(l1=l1)
 
 
 @app.route('/l2')
@@ -289,4 +297,4 @@ if __name__ == "__main__":
     # plot_durations()
     # exit(0)
     # plot_occurrences()
-    app.run(debug=True)
+    app.run(debug=True, port=8006)
