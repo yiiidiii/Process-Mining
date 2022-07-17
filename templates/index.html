@@ -39,56 +39,55 @@
         mining was developed based on the idea alpha miner is built on.
     </p>
     <p class="description">
-        Taken from <a href="https://en.wikipedia.org/wiki/Alpha_algorithm" id="link_page">Wikipedia</a>
+        Taken from <a href="https://en.wikipedia.org/wiki/Alpha_algorithm" target="_blank" id="link_page">Wikipedia</a>
     </p>
 
     <section id="upload_column">
 
         <h2 id="upload">Petri Net from uploaded XES file</h2>
         <p style="font-size: 18px; padding: 20px;">
-            Here, you can upload a XES file to generate the petri net and its statistics.
-            Note that an incorrect XES file will end up in an error.
+            Here you can upload an XES file to generate the petri-net and its statistics.
+            Note that an incorrect XES file will end up with an error.
         </p>
 
         <form method="POST" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
             {{ form.file(
-            class="btn btn-secondary form-control mb-2 "
+            class="btn btn-light form-control mb-2 "
             ) }}
             {{ form.submit(
-            class="btn btn-secondary form-control mb-2 "
+            class="btn btn-light form-control mb-2 "
             ) }}
         </form>
 
     </section>
 
     <section id="test_column">
-        <h2 id="test">Petri nets from test XES files</h2>
+        <h2 id="test">Petri-nets from test XES files</h2>
 
         <p style="font-size: 18px; padding: 20px;">
-            By clicking on any of the buttons, the respective petri net is generated with the alpha miner and you are
-            redirected to
-            another page where the graph and statistics regarding the xes file is shown. The XES files are taken from
-            <a href="https://lehre.bpm.in.tum.de/~pm-prak/datasets/" id="link_page">here</a>.
+            By clicking on any of these buttons below, the respective petri-net is generated with this Alpha Miner, which will be opened on a new page
+            where the graph and statistics of the XES file are shown. The XES files are taken from
+            <a href="https://lehre.bpm.in.tum.de/~pm-prak/datasets/" target="_blank" id="link_page">here</a>.
         </p>
 
         <h3>Initial Testing</h3>
-        <a href="{{ url_for('myapp.l1') }}" class="button">Petri net for L1</a>
-        <a href="{{ url_for('myapp.l5') }}" class="button">Petri net for L5</a>
+        <a href="{{ url_for('myapp.l1') }}" target="_blank" class="button">Petri-net for L1</a>
+        <a href="{{ url_for('myapp.l5') }}" target="_blank" class="button">Petri-net for L5</a>
 
         <h3>Further Testing</h3>
-        <a href="{{ url_for('myapp.l2') }}" class="button">Petri net for L2</a>
-        <a href="{{ url_for('myapp.l3') }}" class="button">Petri net for L3</a>
-        <a href="{{ url_for('myapp.l4') }}" class="button">Petri net for L4</a>
-        <a id="long" href="{{ url_for('myapp.running_example') }}" class="button">Petri net for running-example</a>
-        <a id="long" href="{{ url_for('myapp.posterinstances') }}" class="button">Petri net for posterinstances</a>
-        <a id="long" href="{{ url_for('myapp.billinstances') }}" class="button">Petri net for billinstances</a>
+        <a href="{{ url_for('myapp.l2') }}" target="_blank" class="button">Petri-net for L2</a>
+        <a href="{{ url_for('myapp.l3') }}" target="_blank" class="button">Petri-net for L3</a>
+        <a href="{{ url_for('myapp.l4') }}" target="_blank" class="button">Petri-net for L4</a>
+        <a id="long" href="{{ url_for('myapp.running_example') }}" target="_blank" class="button">Petri-net for running-example</a>
+        <a id="long" href="{{ url_for('myapp.posterinstances') }}" target="_blank" class="button">Petri-net for posterinstances</a>
+        <a id="long" href="{{ url_for('myapp.billinstances') }}" target="_blank" class="button">Petri-net for billinstances</a>
 
 
         <h3>Testing Limitations</h3>
-        <a href="{{ url_for('myapp.l6') }}" class="button">Petri net for L6</a>
-        <a href="{{ url_for('myapp.l7') }}" class="button">Petri net for L7</a>
-        <a id="long" href="{{ url_for('myapp.flyerinstances') }}" class="button">Petri net for flyerinstances</a>
+        <a href="{{ url_for('myapp.l6') }}" target="_blank" class="button">Petri-net for L6</a>
+        <a href="{{ url_for('myapp.l7') }}" target="_blank" class="button">Petri-net for L7</a>
+        <a id="long" href="{{ url_for('myapp.flyerinstances') }}" target="_blank" class="button">Petri-net for flyerinstances</a>
 
     </section>
 

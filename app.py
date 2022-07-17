@@ -5,8 +5,7 @@ import matplotlib.pyplot as pyplot
 import matplotlib.cbook as cbook
 import numpy as np
 import matplotlib.dates as mdates
-from flask import Flask, render_template, send_file
-import flask
+from flask import Flask, render_template, send_file, Blueprint
 from flask_wtf import FlaskForm
 from wtforms import FileField, SubmitField
 from werkzeug.utils import secure_filename
@@ -39,7 +38,6 @@ class UploadFileForm(FlaskForm):
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    print(str(flask.request.build_absoulte_uri))
     form = UploadFileForm()
     if form.validate_on_submit():
         file = form.file.data  # first grab the file
@@ -67,6 +65,7 @@ def home():
     return render_template('index.html', form=form)
 
 
+@bp.route('/download_svg/')
 @app.route('/download_svg/')
 def return_files_svg():
     try:
@@ -75,6 +74,7 @@ def return_files_svg():
         return str(e)
 
 
+@bp.route('/download_pdf/')
 @app.route('/download_pdf/')
 def return_files_pdf():
     try:

@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="static/test_image_page.css" type="text/css">
-        <title>Petri Net Test files</title>
-        <!-- Add icon library -->
-    </head>
 
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="static/test_image_page.css" type="text/css">
+    <title>Petri-Net Test files</title>
+    <!-- Add icon library -->
+</head>
+
+<body>
 
 
     <header>
-        <h1>Petri Net generated from test XES file</h1>
+        <h1>Petri-Net generated from test XES file</h1>
     </header>
 
 
@@ -22,47 +23,49 @@
 
             <!---------------- download files ----------------->
             <div class="container" align="center">
-                <a href="/download_svg/" target="blank" class="button"> Download in SVG format </a>
-                <a href="/download_pdf/" target="blank" class="button"> Download in PDF format </a>
+                <a href="{{ url_for('myapp.return_files_svg') }}" target="blank" class="button"> Download in SVG format
+                </a>
+                <a href="{{ url_for('myapp.return_files_pdf') }}" target="blank" class="button"> Download in PDF format
+                </a>
             </div>
         </div>
 
         <!-------------------- Legend --------------------->
         <div class="col">
 
-            <h3>Legend for petri net</h3>
+            <h3>Legend for petri-net</h3>
 
             <table id="places_table">
                 <thead>
                     <tr>
-                      <th id="th_value">Place</th>
-                      <th>Name</th>
+                        <th id="th_value">Place</th>
+                        <th>Name</th>
                     </tr>
                 </thead>
                 <tbody>
-                {% for key, value in place_legend.items() %}
+                    {% for key, value in place_legend.items() %}
                     <tr>
-                       <td> {{ value }} </td>
-                       <td> {{ key }} </td>
+                        <td> {{ value }} </td>
+                        <td> {{ key }} </td>
                     </tr>
-                {% endfor %}
+                    {% endfor %}
                 </tbody>
             </table>
 
             <table id="trans_table">
                 <thead>
                     <tr>
-                      <th id="th_value">Transition</th>
-                      <th>Name</th>
+                        <th id="th_value">Transition</th>
+                        <th>Name</th>
                     </tr>
                 </thead>
                 <tbody>
-                {% for key, value in trans_legend.items() %}
+                    {% for key, value in trans_legend.items() %}
                     <tr>
-                       <td> {{ value }} </td>
-                       <td> {{ key }} </td>
+                        <td> {{ value }} </td>
+                        <td> {{ key }} </td>
                     </tr>
-                {% endfor %}
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
@@ -79,7 +82,7 @@
         <img src="{{ event_occ }}" alt="event occurrences as bar chart">
     </div>
     <div class="statistics">
-        This bar chart shows the total occurrence of each event, sorted in ascending order.
+        This bar chart shows the total numbers of occurrence of each event, which are sorted in ascending order.
         The x-axis displays the events' names, the y-axis their occurrences.
     </div>
 
@@ -88,15 +91,19 @@
         <img src="{{ trace_dur }}" alt="duration of all traces">
     </div>
     <div class="statistics">
-        <p> This bar chart shows the duration of each trace. If there are more than 14 traces in the log file, only the first and the last seven traces
-        are displayed, which are the traces that have the shortest and longest duration respectively. <br>
-        The x-axis shows the trace names/ids and the y-axis their duration. The format of the duration is given by HH:MM:SS (hours:minutes:seconds). <br>
-        To underline the contrast between the traces with the shortest and longest duration,
-        the y-axis could possibly begin at a higher value than 0. </p>
-        <p> <b>Total Number of traces:</b> {{ num_traces }} </p>
-        <p> <b> Mean duration of traces:</b> {{ mean_duration }} </p>
+        <p> This bar chart shows the duration of each trace. If there are more than 14 traces in the log file, then only
+            the first and the last seven traces
+            are displayed. These traces have the shortest and longest duration respectively. <br>
+            The x-axis shows the trace names/ids and the y-axis their duration. The format of the duration is HH:MM:SS
+            (hours:minutes:seconds). <br>
+            The y-axis might begin at a higher value than 0 to emphasize the contrast between the traces with the
+            shortest and longest duration.
+        </p>
+        <p> <b>Total Number of Traces:</b> {{ num_traces }} </p>
+        <p> <b>Mean Duration of Traces:</b> {{ mean_duration }} </p>
     </div>
 
 
-    </body>
+</body>
+
 </html>

@@ -83,7 +83,6 @@ def graphviz_net(path_to_xes):
 
     net.attr(overlap='scale', fontsize='11', label=label2)
     net.render(f'static/test_files/svg_files/petri_net', cleanup=True, format='pdf')
-    # net.view()
 
     net.attr(overlap='scale', fontsize='11', label=label1)
     return net, pl_legend, trans_legend
