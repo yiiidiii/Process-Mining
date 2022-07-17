@@ -1,0 +1,1 @@
+FLASK_ENV="production" uvicorn app:app --port 8006 --interface wsgi --host "::"

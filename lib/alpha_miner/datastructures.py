@@ -40,7 +40,8 @@ class Place:
     def __init__(self, in_list, out_list):
         self._place_id = Place._place_id
         Place._place_id += 1
-        # for alpha miner
+
+        # for alpha miner, because miner.py only works with event-names for identification
         if (len(in_list) != 0 and all(isinstance(el, str) for el in in_list)) or \
                 (len(out_list) != 0 and all(isinstance(el, str) for el in out_list)):
             self.in_list = list(sorted(in_list))
@@ -50,6 +51,7 @@ class Place:
             for o in range(len(out_list)):
                 self.out_list[o] = MyTransition(self.out_list[o])
             self.name = str(self)
+
         # for unit tests
         else:
             self.in_list = sort(in_list)
