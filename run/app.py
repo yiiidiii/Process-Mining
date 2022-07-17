@@ -5,7 +5,8 @@ import matplotlib.pyplot as pyplot
 import matplotlib.cbook as cbook
 import numpy as np
 import matplotlib.dates as mdates
-from flask import Flask, render_template, send_file, Blueprint
+from flask import Flask, render_template, send_file
+import flask
 from flask_wtf import FlaskForm
 from wtforms import FileField, SubmitField
 from werkzeug.utils import secure_filename
@@ -21,11 +22,14 @@ file_dir = os.path.dirname(
     os.path.abspath(__file__)
 )
 
-app = Flask(__name__, template_folder=os.path.join(file_dir, "..", "templates"), static_folder=os.path.join(file_dir, "..", "static"))
+app = Flask(__name__, template_folder=os.path.join(file_dir, ".." ,"templates"), static_folder=os.path.join(file_dir, ".." ,"static"))
 print(f'The template folder is: {app.template_folder}, and the static_folder is: {app.static_folder} :-)')
 app.config['SECRET_KEY'] = 'supersecretkey'
 app.config['UPLOAD_FOLDER'] = 'static/uploaded_files'
-app.config["APPLICATION_ROOT"] = "/ports/8006"
+# app.config['SERVER_NAME'] = 'lehre.bpm.in.tum.de'
+
+print(app.config)
+
 
 
 class UploadFileForm(FlaskForm):
@@ -35,6 +39,7 @@ class UploadFileForm(FlaskForm):
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
+    print(str(flask.request.build_absoulte_uri))
     form = UploadFileForm()
     if form.validate_on_submit():
         file = form.file.data  # first grab the file
@@ -78,7 +83,7 @@ def return_files_pdf():
         return str(e)
 
 
-@app.route('/l1', methods=['POST', 'GET'])
+@app.route('/l1')
 def l1():
     PATH_XES = 'static/test_files/xes_files/L1.xes'
     PATH_NET = 'static/test_files/svg_files/petri_net'
@@ -86,7 +91,6 @@ def l1():
 
     return visualize_net(PATH_XES, PATH_NET)
 
-app.jinja_env.globals.update(l1=l1)
 
 
 @app.route('/l2')
