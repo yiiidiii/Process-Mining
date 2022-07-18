@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../static/test_image_page.css" type="text/css">
+    <link rel="stylesheet" href="static/test_image_page.css" type="text/css">
     <title>Your Petri Net</title>
 </head>
 <body>
@@ -15,6 +15,13 @@
 
         <div class="col">
             <img src="{{ user_image }}" alt="User Image">
+            
+            <div class="container" align="center">
+                <a href="{{ url_for('myapp.return_files_svg') }}" target="blank" class="button"> Download in SVG format
+                </a>
+                <a href="{{ url_for('myapp.return_files_pdf') }}" target="blank" class="button"> Download in PDF format
+                </a>
+            </div>
         </div>
 
 

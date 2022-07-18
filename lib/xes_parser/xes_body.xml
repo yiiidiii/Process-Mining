@@ -1,129 +1,156 @@
 <log>
 	<trace>
-		<string key="concept:name" value="Case3.0"/>
+		<string key="concept:name" value="Case2.0"/>
 		<event>
 			<string key="org:resource" value="UNDEFINED"/>
-			<date key="time:timestamp" value="2010-10-27T22:31:19.495+02:00"/>
+			<date key="time:timestamp" value="2010-10-27T22:31:19.526+02:00"/>
 			<string key="concept:name" value="a"/>
 			<string key="lifecycle:transition" value="complete"/>
 		</event>
 		<event>
 			<string key="org:resource" value="UNDEFINED"/>
-			<date key="time:timestamp" value="2010-10-27T22:32:19.495+02:00"/>
+			<date key="time:timestamp" value="2010-10-27T22:32:19.526+02:00"/>
+			<string key="concept:name" value="c"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:33:19.526+02:00"/>
+			<string key="concept:name" value="b"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:34:19.526+02:00"/>
+			<string key="concept:name" value="d"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="Case5.0"/>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:31:19.526+02:00"/>
+			<string key="concept:name" value="a"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:32:19.526+02:00"/>
+			<string key="concept:name" value="c"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:33:19.526+02:00"/>
+			<string key="concept:name" value="b"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:34:19.526+02:00"/>
 			<string key="concept:name" value="e"/>
 			<string key="lifecycle:transition" value="complete"/>
 		</event>
 		<event>
 			<string key="org:resource" value="UNDEFINED"/>
-			<date key="time:timestamp" value="2010-10-27T22:33:19.495+02:00"/>
-			<string key="concept:name" value="d"/>
-			<string key="lifecycle:transition" value="complete"/>
-		</event>
-	</trace>
-	<trace>
-		<string key="concept:name" value="Case2.0"/>
-		<event>
-			<string key="org:resource" value="UNDEFINED"/>
-			<date key="time:timestamp" value="2010-10-27T22:31:19.495+02:00"/>
-			<string key="concept:name" value="a"/>
+			<date key="time:timestamp" value="2010-10-27T22:35:19.526+02:00"/>
+			<string key="concept:name" value="f"/>
 			<string key="lifecycle:transition" value="complete"/>
 		</event>
 		<event>
 			<string key="org:resource" value="UNDEFINED"/>
-			<date key="time:timestamp" value="2010-10-27T22:32:19.495+02:00"/>
-			<string key="concept:name" value="c"/>
-			<string key="lifecycle:transition" value="complete"/>
-		</event>
-		<event>
-			<string key="org:resource" value="UNDEFINED"/>
-			<date key="time:timestamp" value="2010-10-27T22:33:19.495+02:00"/>
+			<date key="time:timestamp" value="2010-10-27T22:36:19.526+02:00"/>
 			<string key="concept:name" value="b"/>
 			<string key="lifecycle:transition" value="complete"/>
 		</event>
 		<event>
 			<string key="org:resource" value="UNDEFINED"/>
-			<date key="time:timestamp" value="2010-10-27T22:34:19.495+02:00"/>
-			<string key="concept:name" value="d"/>
-			<string key="lifecycle:transition" value="complete"/>
-		</event>
-	</trace>
-	<trace>
-		<string key="concept:name" value="Case1.2"/>
-		<event>
-			<string key="org:resource" value="UNDEFINED"/>
-			<date key="time:timestamp" value="2010-10-27T22:31:19.495+02:00"/>
-			<string key="concept:name" value="a"/>
-			<string key="lifecycle:transition" value="complete"/>
-		</event>
-		<event>
-			<string key="org:resource" value="UNDEFINED"/>
-			<date key="time:timestamp" value="2010-10-27T22:32:19.495+02:00"/>
-			<string key="concept:name" value="b"/>
-			<string key="lifecycle:transition" value="complete"/>
-		</event>
-		<event>
-			<string key="org:resource" value="UNDEFINED"/>
-			<date key="time:timestamp" value="2010-10-27T22:33:19.495+02:00"/>
+			<date key="time:timestamp" value="2010-10-27T22:37:19.526+02:00"/>
 			<string key="concept:name" value="c"/>
 			<string key="lifecycle:transition" value="complete"/>
 		</event>
 		<event>
 			<string key="org:resource" value="UNDEFINED"/>
-			<date key="time:timestamp" value="2010-10-27T22:34:19.495+02:00"/>
+			<date key="time:timestamp" value="2010-10-27T22:38:19.526+02:00"/>
 			<string key="concept:name" value="d"/>
 			<string key="lifecycle:transition" value="complete"/>
 		</event>
 	</trace>
 	<trace>
-		<string key="concept:name" value="Case1.1"/>
+		<string key="concept:name" value="Case5.1"/>
 		<event>
 			<string key="org:resource" value="UNDEFINED"/>
-			<date key="time:timestamp" value="2010-10-27T22:31:19.495+02:00"/>
+			<date key="time:timestamp" value="2010-10-27T22:31:19.526+02:00"/>
 			<string key="concept:name" value="a"/>
 			<string key="lifecycle:transition" value="complete"/>
 		</event>
 		<event>
 			<string key="org:resource" value="UNDEFINED"/>
-			<date key="time:timestamp" value="2010-10-27T22:32:19.495+02:00"/>
-			<string key="concept:name" value="b"/>
-			<string key="lifecycle:transition" value="complete"/>
-		</event>
-		<event>
-			<string key="org:resource" value="UNDEFINED"/>
-			<date key="time:timestamp" value="2010-10-27T22:33:19.495+02:00"/>
+			<date key="time:timestamp" value="2010-10-27T22:32:19.526+02:00"/>
 			<string key="concept:name" value="c"/>
 			<string key="lifecycle:transition" value="complete"/>
 		</event>
 		<event>
 			<string key="org:resource" value="UNDEFINED"/>
-			<date key="time:timestamp" value="2010-10-27T22:34:19.495+02:00"/>
+			<date key="time:timestamp" value="2010-10-27T22:33:19.526+02:00"/>
+			<string key="concept:name" value="b"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:34:19.526+02:00"/>
+			<string key="concept:name" value="e"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:35:19.526+02:00"/>
+			<string key="concept:name" value="f"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:36:19.526+02:00"/>
+			<string key="concept:name" value="b"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:37:19.526+02:00"/>
+			<string key="concept:name" value="c"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:38:19.526+02:00"/>
 			<string key="concept:name" value="d"/>
 			<string key="lifecycle:transition" value="complete"/>
 		</event>
 	</trace>
 	<trace>
-		<string key="concept:name" value="Case1.0"/>
+		<string key="concept:name" value="Case2.3"/>
 		<event>
 			<string key="org:resource" value="UNDEFINED"/>
-			<date key="time:timestamp" value="2010-10-27T22:31:19.308+02:00"/>
+			<date key="time:timestamp" value="2010-10-27T22:31:19.526+02:00"/>
 			<string key="concept:name" value="a"/>
 			<string key="lifecycle:transition" value="complete"/>
 		</event>
 		<event>
 			<string key="org:resource" value="UNDEFINED"/>
-			<date key="time:timestamp" value="2010-10-27T22:32:19.308+02:00"/>
-			<string key="concept:name" value="b"/>
-			<string key="lifecycle:transition" value="complete"/>
-		</event>
-		<event>
-			<string key="org:resource" value="UNDEFINED"/>
-			<date key="time:timestamp" value="2010-10-27T22:33:19.308+02:00"/>
+			<date key="time:timestamp" value="2010-10-27T22:32:19.526+02:00"/>
 			<string key="concept:name" value="c"/>
 			<string key="lifecycle:transition" value="complete"/>
 		</event>
 		<event>
 			<string key="org:resource" value="UNDEFINED"/>
-			<date key="time:timestamp" value="2010-10-27T22:34:19.308+02:00"/>
+			<date key="time:timestamp" value="2010-10-27T22:33:19.526+02:00"/>
+			<string key="concept:name" value="b"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:34:19.526+02:00"/>
 			<string key="concept:name" value="d"/>
 			<string key="lifecycle:transition" value="complete"/>
 		</event>
@@ -132,25 +159,361 @@
 		<string key="concept:name" value="Case2.1"/>
 		<event>
 			<string key="org:resource" value="UNDEFINED"/>
-			<date key="time:timestamp" value="2010-10-27T22:31:19.495+02:00"/>
+			<date key="time:timestamp" value="2010-10-27T22:31:19.526+02:00"/>
 			<string key="concept:name" value="a"/>
 			<string key="lifecycle:transition" value="complete"/>
 		</event>
 		<event>
 			<string key="org:resource" value="UNDEFINED"/>
-			<date key="time:timestamp" value="2010-10-27T22:32:19.495+02:00"/>
+			<date key="time:timestamp" value="2010-10-27T22:32:19.526+02:00"/>
 			<string key="concept:name" value="c"/>
 			<string key="lifecycle:transition" value="complete"/>
 		</event>
 		<event>
 			<string key="org:resource" value="UNDEFINED"/>
-			<date key="time:timestamp" value="2010-10-27T22:33:19.495+02:00"/>
+			<date key="time:timestamp" value="2010-10-27T22:33:19.526+02:00"/>
 			<string key="concept:name" value="b"/>
 			<string key="lifecycle:transition" value="complete"/>
 		</event>
 		<event>
 			<string key="org:resource" value="UNDEFINED"/>
-			<date key="time:timestamp" value="2010-10-27T22:34:19.495+02:00"/>
+			<date key="time:timestamp" value="2010-10-27T22:34:19.526+02:00"/>
+			<string key="concept:name" value="d"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="Case2.2"/>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:31:19.526+02:00"/>
+			<string key="concept:name" value="a"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:32:19.526+02:00"/>
+			<string key="concept:name" value="c"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:33:19.526+02:00"/>
+			<string key="concept:name" value="b"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:34:19.526+02:00"/>
+			<string key="concept:name" value="d"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="Case3.1"/>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:31:19.526+02:00"/>
+			<string key="concept:name" value="a"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:32:19.526+02:00"/>
+			<string key="concept:name" value="b"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:33:19.526+02:00"/>
+			<string key="concept:name" value="c"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:34:19.526+02:00"/>
+			<string key="concept:name" value="e"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:35:19.526+02:00"/>
+			<string key="concept:name" value="f"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:36:19.526+02:00"/>
+			<string key="concept:name" value="b"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:37:19.526+02:00"/>
+			<string key="concept:name" value="c"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:38:19.526+02:00"/>
+			<string key="concept:name" value="d"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="Case3.0"/>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:31:19.526+02:00"/>
+			<string key="concept:name" value="a"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:32:19.526+02:00"/>
+			<string key="concept:name" value="b"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:33:19.526+02:00"/>
+			<string key="concept:name" value="c"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:34:19.526+02:00"/>
+			<string key="concept:name" value="e"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:35:19.526+02:00"/>
+			<string key="concept:name" value="f"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:36:19.526+02:00"/>
+			<string key="concept:name" value="b"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:37:19.526+02:00"/>
+			<string key="concept:name" value="c"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:38:19.526+02:00"/>
+			<string key="concept:name" value="d"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="Case1.2"/>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:31:19.526+02:00"/>
+			<string key="concept:name" value="a"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:32:19.526+02:00"/>
+			<string key="concept:name" value="b"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:33:19.526+02:00"/>
+			<string key="concept:name" value="c"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:34:19.526+02:00"/>
+			<string key="concept:name" value="d"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="Case4.0"/>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:31:19.526+02:00"/>
+			<string key="concept:name" value="a"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:32:19.526+02:00"/>
+			<string key="concept:name" value="b"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:33:19.526+02:00"/>
+			<string key="concept:name" value="c"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:34:19.526+02:00"/>
+			<string key="concept:name" value="e"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:35:19.526+02:00"/>
+			<string key="concept:name" value="f"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:36:19.526+02:00"/>
+			<string key="concept:name" value="c"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:37:19.526+02:00"/>
+			<string key="concept:name" value="b"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:38:19.526+02:00"/>
+			<string key="concept:name" value="d"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="Case1.1"/>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:31:19.526+02:00"/>
+			<string key="concept:name" value="a"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:32:19.526+02:00"/>
+			<string key="concept:name" value="b"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:33:19.526+02:00"/>
+			<string key="concept:name" value="c"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:34:19.526+02:00"/>
+			<string key="concept:name" value="d"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="Case1.0"/>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:31:19.526+02:00"/>
+			<string key="concept:name" value="a"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:32:19.526+02:00"/>
+			<string key="concept:name" value="b"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:33:19.526+02:00"/>
+			<string key="concept:name" value="c"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:34:19.526+02:00"/>
+			<string key="concept:name" value="d"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="Case6.0"/>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:31:19.526+02:00"/>
+			<string key="concept:name" value="a"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:32:19.526+02:00"/>
+			<string key="concept:name" value="c"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:33:19.526+02:00"/>
+			<string key="concept:name" value="b"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:34:19.526+02:00"/>
+			<string key="concept:name" value="e"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:35:19.526+02:00"/>
+			<string key="concept:name" value="f"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:36:19.526+02:00"/>
+			<string key="concept:name" value="b"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:37:19.526+02:00"/>
+			<string key="concept:name" value="c"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:38:19.526+02:00"/>
+			<string key="concept:name" value="e"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:39:19.526+02:00"/>
+			<string key="concept:name" value="f"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:40:19.526+02:00"/>
+			<string key="concept:name" value="c"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:41:19.526+02:00"/>
+			<string key="concept:name" value="b"/>
+			<string key="lifecycle:transition" value="complete"/>
+		</event>
+		<event>
+			<string key="org:resource" value="UNDEFINED"/>
+			<date key="time:timestamp" value="2010-10-27T22:42:19.526+02:00"/>
 			<string key="concept:name" value="d"/>
 			<string key="lifecycle:transition" value="complete"/>
 		</event>

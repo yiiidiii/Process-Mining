@@ -36,6 +36,7 @@ class UploadFileForm(FlaskForm):
     submit = SubmitField('Upload File')
 
 
+@bp.route('/', methods=['GET', 'POST'])
 @app.route('/', methods=['GET', 'POST'])
 def home():
     form = UploadFileForm()
@@ -56,8 +57,8 @@ def home():
         plot_occurrences()
         plot_durations()
 
-        net.render(os.path.join("static/uploaded_nets", secure_filename(file.filename)), cleanup=True, format='svg')
-        return render_template('user_image.html', user_image=os.path.join("static/uploaded_nets", secure_filename(file.filename)) + '.svg',
+        net.render("static/test_files/svg_files/petri_net", cleanup=True, format='svg')
+        return render_template('user_image.html', user_image="static/test_files/svg_files/petri_net" + ".svg",
                                trans_legend=trans_legend, place_legend=pl_legend,
                                num_traces=num_traces, event_occ='static/statistics/event_occurrences.svg', trace_dur='static/statistics/trace_durations.svg',
                                mean_duration=mean_duration)
@@ -194,8 +195,7 @@ def visualize_net(path_xes_file, path_net_file):
     plot_durations()
 
     net.render(f'{path_net_file}', cleanup=True, format='svg')
-    # net.render(f'{path_net_file}', cleanup=True, format='pdf')
-    return render_template('images_test_files.html', svg_file=f'{path_net_file}' + '.svg', pdf_file=f'{path_net_file}' + '.pdf',
+    return render_template('images_test_files.html', svg_file=f'{path_net_file}' + '.svg',
                            place_legend=place_legend, trans_legend=trans_legend,
                            num_traces=num_traces, event_occ='static/statistics/event_occurrences.svg', trace_dur='static/statistics/trace_durations.svg',
                            mean_duration=mean_duration)
@@ -306,12 +306,8 @@ def plot_durations():
     plt.savefig('static/statistics/trace_durations.svg', format='svg', bbox_inches='tight')
 
 
-print(os.environ.get("FLASK_ENV"))
-
 app.register_blueprint(bp)
 
+
 if __name__ == "__main__":
-    # plot_durations()
-    # exit(0)
-    # plot_occurrences()
     app.run(debug=True)
