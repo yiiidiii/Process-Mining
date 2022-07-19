@@ -60,12 +60,14 @@ def graphviz_net(path_to_xes):
     net.attr('node', shape='circle', fixedsize='true', width='0.7', margin='1')
     pl_legend = key(step_6_places, transition_list=None)
     for pl in pl_legend.values():
-        if str(pl) == "start":
+        # tried to fix position of start and end node but did not work
+        """if str(pl) == "start":
             net.node(str(pl))
         if str(pl) == "end":
             net.node(str(pl))
         else:
-            net.node(str(pl))
+            net.node(str(pl))"""
+        net.node(str(pl))
 
     # create transitions
     obj_transitions = [ds.MyTransition(t) for t in am.step_1_get_event_names_as_set(traces)]
