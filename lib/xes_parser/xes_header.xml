@@ -22,6 +22,6 @@
 	<classifier name="Event Name" keys="concept:name"/>
 	<classifier name="Resource" keys="org:resource"/>
 	<string key="source" value="Rapid Synthesizer"/>
-	<string key="concept:name" value="L2.mxml"/>
+	<string key="concept:name" value="L1.mxml"/>
 	<string key="lifecycle:model" value="standard"/>
 </log>

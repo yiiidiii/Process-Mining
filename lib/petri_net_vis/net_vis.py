@@ -39,7 +39,7 @@ def key(places_list: List[ds.Place] = None, transition_list: List[ds.MyTransitio
 def graphviz_net(path_to_xes):
     file_name = os.path.basename(path_to_xes)
     file_name = file_name.replace('.xes', '')
-    net = graphviz.Digraph('my Petri Net', filename=f'static/test_files/png_files/{file_name}', engine='neato', format='pdf')
+    net = graphviz.Digraph('my Petri Net', filename=f'static/test_files/png_files/{file_name}', engine='neato', format='svg')
 
     # preparation
     (header, body) = am.prepare(path_to_xes)
@@ -55,7 +55,12 @@ def graphviz_net(path_to_xes):
     net.attr('node', shape='circle', fixedsize='true', width='0.7', margin='1')
     pl_legend = key(step_6_places, transition_list=None)
     for pl in pl_legend.values():
-        net.node(str(pl))
+        if str(pl) == "start":
+            net.node(str(pl), pos='0,0!')
+        if str(pl) == "end":
+            net.node(str(pl))
+        else:
+            net.node(str(pl))
 
     # create transitions
     obj_transitions = [ds.MyTransition(t) for t in am.step_1_get_event_names_as_set(traces)]
@@ -81,17 +86,8 @@ def graphviz_net(path_to_xes):
     for tr in trans_legend.keys():
         label2 = label2 + f'{str(trans_legend.get(tr))}: {str(tr)}, \n'
 
-    net.attr(overlap='scale', fontsize='11', label=label2)
+    net.attr(fontsize='11', label=label2)
     net.render(f'static/test_files/svg_files/petri_net', cleanup=True, format='pdf')
 
     net.attr(overlap='scale', fontsize='11', label=label1)
     return net, pl_legend, trans_legend
-
-
-def main():
-    net, pl, trans = graphviz_net('log_data/running-example.xes')
-    net.view()
-
-
-if __name__ == "__main__":
-    main()
