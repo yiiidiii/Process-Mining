@@ -108,7 +108,7 @@ class Edge:
 
 def main():
     # Transitions:
-    trans_a = MyTransition('a')
+    """trans_a = MyTransition('a')
     trans_b = MyTransition('b')
     trans_c = MyTransition('c')
     trans_d = MyTransition('d')
@@ -135,14 +135,14 @@ def main():
     test_places = am.step_6_create_places(traces)
     test_transitions = am.step_1_get_event_names_as_set(traces)
 
-    return correct_place_list == test_places
+    return correct_place_list == test_places"""
 
 
 if __name__ == '__main__':
-    # print(main())
-    trans_a = MyTransition('a')
-    trans_b = MyTransition('b')
-    trans_e = MyTransition('e')
-    transitions = string_list([trans_a, trans_b, trans_e])
-    place_a_eb = Place([trans_a], [trans_e, trans_b])
-    print(sort(place_a_eb.out_list))
+    main()
+    # trans_a = MyTransition('a')
+    # trans_b = MyTransition('b')
+    # trans_e = MyTransition('e')
+    # transitions = string_list([trans_a, trans_b, trans_e])
+    # place_a_eb = Place([trans_a], [trans_e, trans_b])
+    # print(sort(place_a_eb.out_list))

@@ -25,7 +25,8 @@ app = Flask(__name__, template_folder="templates", static_folder="static")
 app.config['SECRET_KEY'] = 'supersecretkey'
 app.config['UPLOAD_FOLDER'] = 'static/uploaded_files'
 
-if os.environ.get("FLASK_ENV") == "production": # on live server
+# blueprints for separating localhost and server deployment
+if os.environ.get("FLASK_ENV") == "production":  # on live server
     bp = Blueprint('myapp', __name__, template_folder='templates', static_folder="static", url_prefix='/ports/8006')
 else:
     bp = Blueprint('myapp', __name__, template_folder='templates', static_folder="static", url_prefix='')
@@ -36,6 +37,7 @@ class UploadFileForm(FlaskForm):
     submit = SubmitField('Upload File')
 
 
+# below are the methods that are used for the links
 @bp.route('/', methods=['GET', 'POST'])
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -88,102 +90,97 @@ def return_files_pdf():
 @app.route('/l1')
 def l1():
     PATH_XES = 'static/test_files/xes_files/L1.xes'
-    PATH_NET = 'static/test_files/svg_files/petri_net'
 
-    return visualize_net(PATH_XES, PATH_NET)
+    return visualize_net(PATH_XES)
 
 
 @bp.route('/l2')
 @app.route('/l2')
 def l2():
     PATH_XES = 'static/test_files/xes_files/L2.xes'
-    PATH_NET = 'static/test_files/svg_files/petri_net'
 
-    return visualize_net(PATH_XES, PATH_NET)
+    return visualize_net(PATH_XES)
 
 
 @bp.route('/l3')
 @app.route('/l3')
 def l3():
     PATH_XES = 'static/test_files/xes_files/L3.xes'
-    PATH_NET = 'static/test_files/svg_files/petri_net'
 
-    return visualize_net(PATH_XES, PATH_NET)
+    return visualize_net(PATH_XES)
 
 
 @bp.route('/l4')
 @app.route('/l4')
 def l4():
     PATH_XES = 'static/test_files/xes_files/L4.xes'
-    PATH_NET = 'static/test_files/svg_files/petri_net'
 
-    return visualize_net(PATH_XES, PATH_NET)
+    return visualize_net(PATH_XES)
 
 
 @bp.route('/l5')
 @app.route('/l5')
 def l5():
     PATH_XES = 'static/test_files/xes_files/L5.xes'
-    PATH_NET = 'static/test_files/svg_files/petri_net'
 
-    return visualize_net(PATH_XES, PATH_NET)
+    return visualize_net(PATH_XES)
 
 
 @bp.route('/l6')
 @app.route('/l6')
 def l6():
     PATH_XES = 'static/test_files/xes_files/L6.xes'
-    PATH_NET = 'static/test_files/svg_files/petri_net'
 
-    return visualize_net(PATH_XES, PATH_NET)
+    return visualize_net(PATH_XES)
 
 
 @bp.route('/l7')
 @app.route('/l7')
 def l7():
     PATH_XES = 'static/test_files/xes_files/L7.xes'
-    PATH_NET = 'static/test_files/svg_files/petri_net'
 
-    return visualize_net(PATH_XES, PATH_NET)
+    return visualize_net(PATH_XES)
 
 
 @bp.route('/billinstances')
 @app.route('/billinstances')
 def billinstances():
     PATH_XES = 'static/test_files/xes_files/billinstances.xes'
-    PATH_NET = 'static/test_files/svg_files/petri_net'
 
-    return visualize_net(PATH_XES, PATH_NET)
+    return visualize_net(PATH_XES)
 
 
 @bp.route('/posterinstances')
 @app.route('/posterinstances')
 def posterinstances():
     PATH_XES = 'static/test_files/xes_files/posterinstances.xes'
-    PATH_NET = 'static/test_files/svg_files/petri_net'
 
-    return visualize_net(PATH_XES, PATH_NET)
+    return visualize_net(PATH_XES)
 
 
 @bp.route('/flyerinstances')
 @app.route('/flyerinstances')
 def flyerinstances():
     PATH_XES = 'static/test_files/xes_files/flyerinstances.xes'
-    PATH_NET = 'static/test_files/svg_files/petri_net'
 
-    return visualize_net(PATH_XES, PATH_NET)
+    return visualize_net(PATH_XES)
 
 
 @bp.route('/running-example')
 @app.route('/running-example')
 def running_example():
     PATH_XES = 'static/test_files/xes_files/running-example.xes'
-    PATH_NET = 'static/test_files/svg_files/petri_net'
 
-    return visualize_net(PATH_XES, PATH_NET)
+    return visualize_net(PATH_XES)
 
 
-def visualize_net(path_xes_file, path_net_file):
+def visualize_net(path_xes_file):
+    """
+    calculates the statistics and generates the petri net for the XES given as parameter
+    :param path_xes_file: path to the XES file
+    :return: template for visualizing the net and its statistics
+    """
+    path_net_file = "static/test_files/svg_files/petri_net"
     net, place_legend, trans_legend = petri_net_vis.net_vis.graphviz_net(f'{path_xes_file}')
     num_traces = stat.num_of_traces(path_xes_file)
     stat.num_events_total(path_xes_file)
@@ -210,7 +207,7 @@ def plot_occurrences():
 
     df = pd.DataFrame(data)
 
-    # Here we sort the second column, i.e. the duration by its value
+    # sort the second column, i.e. the duration by its value
     df = df.sort_values('occurrence', ascending=True)
 
     # subplots gives us n (default 1) plot and its axis
@@ -260,11 +257,11 @@ def plot_durations():
 
     df2 = pd.DataFrame(data)
 
-    # Reading the data as time delta because time delta is what we need
+    # Reading the data as time delta because
     df2["trace_name"] = df2["trace_name"].astype(str)
     df2["duration"] = pd.to_timedelta(df2["duration"])
 
-    # Here we sort the second column, i.e. the duration by its value
+    # Here we sort the second column (the duration) by its value
     df2 = df2.sort_values('duration', ascending=True)
 
     # If length of x-axis too high, then only the first 7 and last 7 entries are taken
@@ -272,17 +269,14 @@ def plot_durations():
     if len(df2["duration"]) >= 15:
         df2 = df2.iloc[list(range(7)) + list(range(len(df2) - 7, len(df2)))]
 
-    # If you want to print the duration please uncomment the next line UwU
-    # print(df2['duration'])
     # formatter gives us the nanoseconds as HH:MM:SS
     formatter = FuncFormatter(format_func)
 
-    # subplots gives us n (default 1) plot and its axis
     # We configure the figure size as the number of elements in the x-axis
     # The height is set statically to 6 (inches)
     fig, ax = plt.subplots(figsize=(len(df2['trace_name']), 6))
 
-    # Sets our glorious formatter to the y axis, so it looks as beautiful as the sun
+    # Sets the formatter to the y-axis
     ax.yaxis.set_major_formatter(formatter)
 
     # sets the name of the graph

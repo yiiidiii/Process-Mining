@@ -20,20 +20,20 @@ def prepare(path_to_xes_file: string):
     lines = file.readlines()
     file.close()
 
+    # split the XES file into header and body
     path_header = 'lib/xes_parser/xes_header.xml'
     path_body = 'lib/xes_parser/xes_body.xml'
     new_file = open(path_header, 'w')
     xes_copy = open(path_body, 'w')
-    xes_copy.write('<log>\n')
 
+    # convert xes body to an XML file
     first = False
+    xes_copy.write('<log>\n')
     for line in lines:
         if '?xml' in line:
             new_file.write(line)
-            # xes_copy.write(line)
         elif 'log' in line:
             new_file.write(line)
-            # xes_copy.write(line)
         elif '<trace>' in line and not first:
             first = True
             xes_copy.write(line)
@@ -41,14 +41,9 @@ def prepare(path_to_xes_file: string):
             new_file.write(line)
         else:
             xes_copy.write(line)
-
     xes_copy.write('</log>\n')
 
     return path_header, path_body
-
-
-def parse_header(path_to_header_xml: string):
-    return NotImplemented
 
 
 def parse_body(path_to_body_xml: string):
@@ -121,9 +116,6 @@ def parse_event(event) -> Union[datastructure.Event, None]:
     for attr in event:
         key = attr.attrib.get('key')
         val = attr.attrib.get('value')
-        # TODO: lifecycle transition, remove if statement
-        # if 'lifecycle:transition' in key and 'start' in val:
-        #     return None
         if 'concept:name' in key:
             has_name = True
         attributes.append(datastructure.Attribute(key, val))
@@ -137,9 +129,20 @@ def parse_event(event) -> Union[datastructure.Event, None]:
 
 
 def handle_life_cycles(event_list, life_cycle_types):
+    """
+    handling of lifecycle transitions: add attribute 'start' to indicate whether the event is the start of a life cycle transition. If start=False, alpha miner
+    will ignore event.
+    :param event_list:
+    :param life_cycle_types:
+    :return:
+    """
+
+    # if there is only one type of life cycle transition, set 'start'-attribute for all events to true
     if len(life_cycle_types) == 1:
         for event in event_list:
             event.attributes.append(datastructure.Attribute('start', 'True'))
+    # else: differentiate between life cycle transition = start or something else.
+    # Assumption: the XES file is correct, meaning no event that has started but did not complete util end of trace, ...
     else:
         for event in event_list:
             lifecycle_transition = next((a.value for a in event.attributes if a.key == 'lifecycle:transition'), None)
@@ -157,7 +160,7 @@ def difference(lst1, lst2):
     :param lst2: shorter list (only trace attributes)
     :return: list with only events
     """
-    # len(lst1) > len(lst2)
+
     a = lst1
     b = lst2
     mask = np.full((len(a)), True)

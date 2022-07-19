@@ -53,11 +53,6 @@ def step_2_3_first_last_event_names(all_events):
     :return: set of names of the first events, list of names of last events
     """
 
-    """# take the events from the trace objects
-    all_events = []
-    for trace in traces:
-        all_events.append(trace.events)"""
-
     # take the first and last element from each event list
     first_events = set([event[0] for event in all_events])
     last_events = set([event[-1] for event in all_events])
@@ -148,7 +143,7 @@ def get_directly_follows_all(name_lists):
 
 def get_inverse_directly_follows(event_names_llist):
     """
-    computes the inverse of every "directly-follows"-tuple as support method for get_unrelated_relation
+    computes the inverse of every "directly-follows"-tuple as support method for 'get_unrelated_relation'
     :param event_names_llist: list of lists of event names
     :return: list of reversed "directly follows" tuples
     """
@@ -162,7 +157,7 @@ def get_inverse_directly_follows(event_names_llist):
 def get_causal_parallel_relation(event_names_llist):
     """
     part of step 4 of alpha algorithm: computes all parallel and causal relations of the tuples from the
-    directly follows list
+    'directly follows list'
     :param event_names_llist: list of all traces from the log file
     :return: list of tuples of causal and parallel relations
     """
@@ -178,13 +173,11 @@ def get_causal_parallel_relation(event_names_llist):
 
     # removes all tuples that are related with any of the loop-transitions
     to_be_removed = []
-    # dir_fol_n = []
     for t in directly_follows_set:
         for p in parallel:
             if t[0] == p[0] or t[1] == p[0]:
                 # break
                 to_be_removed.append(t)
-            # dir_fol_n.append(t)
     directly_follows_set = [t for t in directly_follows_set if t not in to_be_removed]
 
     # remove all tuples that have their inverse version in the set
@@ -194,11 +187,6 @@ def get_causal_parallel_relation(event_names_llist):
             if set(directly_follows_set[i]) == set(directly_follows_set[j]):
                 parallel.append(directly_follows_set[i])
                 parallel.append(directly_follows_set[j])
-        # loop of length 1: (x, x)
-        """if directly_follows_set[i][0] == directly_follows_set[i][1]:
-            parallel.append(directly_follows_set[i])
-    if directly_follows_set[current_len - 1][0] == directly_follows_set[current_len - 1][1]:
-        parallel.append(directly_follows_set[current_len - 1])"""
 
     # causal relation is (directly-follows list) \ (parallel)
     causal = [t for t in directly_follows_set if t not in parallel]
@@ -229,7 +217,7 @@ def get_unrelated_relation(event_names_set, event_names_llist):
 
 def get_disjoint_unrelated_sets(event_names_set, event_names_llist):
     """
-    calculates the disjoint unrelated tuples in the unrelated list, so that all elements in each set of the returned list
+    calculates all disjoint unrelated tuples in the unrelated list, so that all elements in each set of the returned list
     have the relation "#" to each other
     :param event_names_set, all event names as set
     :param event_names_llist: list of lists of event names
@@ -256,7 +244,7 @@ def get_disjoint_unrelated_sets(event_names_set, event_names_llist):
 def is_element_unrelated_with_set(element, disjoint_set, unrelated_tuple_list):
     """
     computes whether an element has the "#" (unrelated) relation with every element in the disjoint set
-    is helper method for get_disjoint_unrelated_set
+    is helper method for 'get_disjoint_unrelated_set'
     :param element: element in question
     :param disjoint_set: set of elements that are all pairwise unrelated to each other
     :param unrelated_tuple_list: list of tuples that contains all pairwise unrelated elements/events of the log file
@@ -278,14 +266,19 @@ def is_element_unrelated_with_set(element, disjoint_set, unrelated_tuple_list):
 
 def step_4_5(event_names_set, event_name_llists):
     """
-    step 4 and 5 of the alpha algorithm: calculate the relation defined in step 4 and get the maximum of them
+    step 4 and 5 of the alpha algorithm: calculate the relation defined in step 4 and get the maximum of them. For a more detailed description
     :param event_names_set: all events names as set
     :param event_name_llists: list of traces defined in the log file
     :return: a list of relations as defined in step 4
     """
 
     causal, parallel = get_causal_parallel_relation(event_name_llists)
-    set_directly_following = []  # List of tuples containing two sets: [({'a'}, {'b', 'c'}), ({'d'}, {'e', 'f'})]
+
+    # List of tuples containing two sets with event names, for example: [({'a'}, {'b', 'c'}), ({'d'}, {'e', 'f'})] --> b and c are directly following event a
+    set_directly_following = []
+
+    # List of tuples containing two sets with event names, but with opposite meaning as 'set_directly following':
+    # for example: [({'a', 'b'}, {'c'}), ({'d', 'e'}, {'f'})] --> events a and b come directly before event c, event d and e come directly before f
     set_directly_followed = []
 
     for fol_element in causal:
@@ -310,23 +303,26 @@ def step_4_5(event_names_set, event_name_llists):
         if not is_element_followed:
             set_directly_followed.append(({fol_element[0]}, {fol_element[1]}))
 
+    # calculate all events that are unrelated with each other
     disjoint_unrelated = get_disjoint_unrelated_sets(event_names_set, event_name_llists)
     disjoint_unrelated = list(set(frozenset(item) for item in disjoint_unrelated))
     disjoint_unrelated = [set(item) for item in disjoint_unrelated]
 
+    # separation of subsets in 'set_directly_following', so that all events are unrelated with each other
+    # ({a}, {b, c, d}) -> ({a}, {b, c}), ({a}, {c, d}) --> b and c are unrelated with other, c and d are unrelated with each other
     filtered_following_list_1 = [t for t in set_directly_following if len(t[1]) > 1]
     filtered_following_list_0 = [t for t in set_directly_following if len(t[1]) == 1]
     intersection_following = [intersection_unrelated_set(disjoint_unrelated, t, 1) for t in filtered_following_list_1]
     result_temp1 = [(filtered_following_list_1[i][0], s) for i in range(len(filtered_following_list_1)) for s in intersection_following[i]]
 
+    # separation of subsets in 'set_directly_followed', so that all events are unrelated with each other
+    # ({a, b, c}, {d}) -> ({a, b}, {d}), ({b, c}, {d}) --> a and b are unrelated with other, b and c are unrelated with each other
     filtered_followed_list_1 = [t for t in set_directly_followed if len(t[0]) > 1]
     filtered_followed_list_0 = [t for t in set_directly_followed if len(t[0]) == 1]
     intersection_followed = [intersection_unrelated_set(disjoint_unrelated, t, 0) for t in filtered_followed_list_1]
     result_temp2 = [(s, filtered_followed_list_1[i][1]) for i in range(len(filtered_followed_list_1)) for s in intersection_followed[i]]
 
-    # if fist element of 2 tuples are unrelated with each other and all their "directly-follows" elements are the same,
-    # they can be grouped as one --> step 5 of alpha algorithm
-
+    # step 5 of alpha algorithm: simplify and summarize the relations
     result = filter_subset(result_temp1 + filtered_following_list_0 + result_temp2 + filtered_followed_list_0)
     result = summarize_regarding_unrelated_set(result, disjoint_unrelated, 1)
     result = summarize_regarding_unrelated_set(result, disjoint_unrelated, 0)
@@ -334,14 +330,24 @@ def step_4_5(event_names_set, event_name_llists):
     return result
 
 
-def summarize_regarding_unrelated_set(tuple_list, disjoint_unrelated_set, mode):
+def summarize_regarding_unrelated_set(tuple_list, disjoint_unrelated_sets, mode):
+    """
+    from the relation of sept 4, there are tuples, in which the sets can be unified: they are unrelated with each other and have the same events following them/
+    they follow the same events
+    :param tuple_list: list of tuples containing the relation defined by step 4
+    :param disjoint_unrelated_sets: list of sets, in which all events are unrelated with each other
+    :param mode:
+        1 --> summarize regarding second subset in each tuple: ({a}, {b}), ({a}, {c}) --> ({a}, {b, c}) if b and c are unrelated with each other
+        0 --> summarize regarding first subset in each tuple: ({a}, {b}), ({c}, {b}) --> ({a, c}, {b}) if a and c are unrelated with each other
+    :return: summarized/simplified tuple_list
+    """
     result = []
     if mode == 1:
         map_result = [False] * len(tuple_list)
 
         for i in range(len(tuple_list) - 1):
             for j in range(i + 1, len(tuple_list)):
-                if tuple_list[i][0] == tuple_list[j][0] and any([set(tuple_list[i][1]).issubset(dis) and set(tuple_list[j][1]).issubset(dis) for dis in disjoint_unrelated_set]):
+                if tuple_list[i][0] == tuple_list[j][0] and any([set(tuple_list[i][1]).issubset(dis) and set(tuple_list[j][1]).issubset(dis) for dis in disjoint_unrelated_sets]):
                     result.append((tuple_list[i][0], tuple_list[i][1].union(tuple_list[j][1])))
                     map_result[i] = True
                     map_result[j] = True
@@ -360,7 +366,7 @@ def summarize_regarding_unrelated_set(tuple_list, disjoint_unrelated_set, mode):
 
         for i in range(len(tuple_list) - 1):
             for j in range(i + 1, len(tuple_list)):
-                if tuple_list[i][1] == tuple_list[j][1] and any([set(tuple_list[i][0]).issubset(dis) and set(tuple_list[j][0]).issubset(dis) for dis in disjoint_unrelated_set]):
+                if tuple_list[i][1] == tuple_list[j][1] and any([set(tuple_list[i][0]).issubset(dis) and set(tuple_list[j][0]).issubset(dis) for dis in disjoint_unrelated_sets]):
                     result.append((tuple_list[i][0].union(tuple_list[j][0]), tuple_list[i][1]))
                     map_result[i] = True
                     map_result[j] = True
@@ -378,6 +384,7 @@ def summarize_regarding_unrelated_set(tuple_list, disjoint_unrelated_set, mode):
 def filter_subset(tuple_list):
     """
     filters out all elements (tuples) in which both sets are already in another tuple as "subsets"
+    ({a}, {b, c}), ({a}, {b}) --> delete second tuple
     :param tuple_list: list of tuples in question
     :return: filtered/simplified list of tuples
     """
@@ -402,7 +409,7 @@ def intersection_unrelated_set(disjoint_unrelated_set, following_relation, mode)
     :param mode: split the first set (0) or the second set (1) of each tuple
     :return: list of lists of sets, in which the set in question was split
     """
-    # following relation: ({a, b}, {c, d, e})
+    # following relation example: ({a, b}, {c, d, e})
     res = []
     fst_set = following_relation[mode]
     if len(fst_set) != 1:
@@ -417,28 +424,6 @@ def intersection_unrelated_set(disjoint_unrelated_set, following_relation, mode)
                 if not any([inters.issubset(i) for i in res]):
                     res.append(inters)
     return res
-
-
-"""def in_same_disjoint_unrelated_set(element1, element2, disjoint_unrelated_list):
-    helper method to calculate whether element1 and element2 are unrelated
-    :param element1: first element in question
-    :param element2: second element in question
-    :param disjoint_unrelated_list: list of sets, in which all elements are unrelated with each other
-    :return: true, if both elements are unrelated, false otherwise
-    
-    el1 = element1.pop()
-    el2 = element2.pop()
-
-    for s in disjoint_unrelated_list:
-        if el1 in s and el2 in s:
-            element2.add(el2)
-            element1.add(el1)
-            return True
-
-    element2.add(el2)
-    element1.add(el1)
-    return False
-"""
 
 
 def step_6_create_places(step_4_relations, first_event_names, last_event_names):
@@ -482,31 +467,21 @@ def step_7_create_edges(places_list):
 
 
 def alpha_miner(path_to_xes):
+    """
+    runs the alpha miner for the XES-file at th path 'path_to_xes'
+    :param path_to_xes: path to the XES file
+    :return: all event names, places and edges for the petri net
+    """
     (header, body) = prepare(path_to_xes)
     traces = parse_body(body)
     event_names_llist = filtered_traces_list(traces)
 
     event_names_set = step_1_get_event_names_as_set(traces)
     first, last = step_2_3_first_last_event_names(event_names_llist)
-    directly_follows = get_directly_follows_all(event_names_llist)
-    unrelated = get_unrelated_relation(event_names_set, event_names_llist)
-    causal, parallel = get_causal_parallel_relation(event_names_llist)
 
     step_4_5_relations = step_4_5(event_names_set, event_names_llist)
     step_6_places = step_6_create_places(step_4_5_relations, first, last)
     step_7_edges = step_7_create_edges(step_6_places)
-
-    """print('first: ' + str(first))
-    print('last: ' + str(last))
-    print('directly follows: ' + str(directly_follows))
-    print('causal: ' + str(causal))
-    print('unrelated: ' + str(unrelated))
-    print('step 4, 5 relations' + str(step_4_5_relations))"""
-
-    for p in step_6_places:
-        print(str(p))
-    for e in step_7_edges:
-        print(str(e))
 
     return event_names_set, step_6_places, step_7_edges
 

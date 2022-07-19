@@ -25,7 +25,7 @@ def num_events_total(path_to_xes_file):
     events_occ_list = [{'event_name': str(event), 'occurrence': 0} for event in events_set]
 
     for events in event_list:
-        # events = ['a', 'b', 'c']
+        # example events = ['a', 'b', 'c']
         for d in events_occ_list:
             num = events.count(d.get('event_name'))
             d['occurrence'] = d.get('occurrence') + num
@@ -37,8 +37,6 @@ def num_events_total(path_to_xes_file):
     writer.writeheader()
     for di in events_occ_list:
         writer.writerow(di)
-
-    # return events_occ_list
 
 
 def get_durations_of_traces(path_to_xes_file):
@@ -66,6 +64,7 @@ def get_durations_of_traces(path_to_xes_file):
             if d['trace_name'] == trace_name:
                 d['duration'] = str(duration)
 
+    # calculate average duration
     average_duration = average_duration / len(trace_duration_dict)
 
     trace_duration_dict = sorted(trace_duration_dict, key=lambda x: x['duration'], reverse=True)
@@ -98,9 +97,9 @@ def format_duration(duration):
 
 
 def main():
-    # print('number of events: ' + str(num_events_total('log_data/L1.xes')))
+    print('number of events: ' + str(num_events_total('log_data/L1.xes')))
     # print('occurrences of all events: ' + str(num_events_total('log_data/L1.xes')))
-    print('max and min duration of traces: ' + str(get_durations_of_traces('log_data/flyerinstances.xes')))
+    # print('max and min duration of traces: ' + str(get_durations_of_traces('log_data/flyerinstances.xes')))
 
 
 if __name__ == '__main__':

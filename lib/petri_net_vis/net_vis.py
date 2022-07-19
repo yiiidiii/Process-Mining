@@ -37,6 +37,11 @@ def key(places_list: List[ds.Place] = None, transition_list: List[ds.MyTransitio
 
 
 def graphviz_net(path_to_xes):
+    """
+    generates transitions, places and edges for the petri net
+    :param path_to_xes: path to the XES file, for which the petri net is generated
+    :return:
+    """
     file_name = os.path.basename(path_to_xes)
     file_name = file_name.replace('.xes', '')
     net = graphviz.Digraph('my Petri Net', filename=f'static/test_files/png_files/{file_name}', engine='neato', format='svg')
