@@ -61,7 +61,7 @@ def graphviz_net(path_to_xes):
     pl_legend = key(step_6_places, transition_list=None)
     for pl in pl_legend.values():
         if str(pl) == "start":
-            net.node(str(pl), pos='0,0!')
+            net.node(str(pl))
         if str(pl) == "end":
             net.node(str(pl))
         else:
