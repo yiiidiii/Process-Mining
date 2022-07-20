@@ -1,1 +1,0 @@
-FLASK_ENV="development" uvicorn app:app --port 8006 --interface wsgi

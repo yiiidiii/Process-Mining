@@ -27,7 +27,7 @@ pip install -r requirements.txt
 
 Run on localhost:
 ```bash
-bash run_local.sh
+python app.py
 ```
 
 Run on server:
