@@ -15,7 +15,7 @@ can be found in the PowerPoint presentation(s).
 
 Please run the following commands from the root directory (/praktikum_process_mining).
 
-Activate the virtual environment:
+Create a virtual environment and activate it:
 ```bash
 source venv/bin/activate
 ```
