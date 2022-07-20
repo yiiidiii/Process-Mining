@@ -1,7 +1,6 @@
 event_name,occurrence
-b,20
-c,20
-d,13
-a,13
-f,7
-e,7
+design flyer,1809
+send draft to customer,1809
+deliver flyer,900
+print flyer,900
+receive flyer order,900
