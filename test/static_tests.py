@@ -32,7 +32,7 @@ class TestAlphaMiner(unittest.TestCase):
                          ds.Edge(place_ec_d, trans_d), ds.Edge(place_start, trans_a), ds.Edge(trans_d, place_end)]
 
         # test results
-        test_transitions, test_places, test_edges = am.alpha_miner('log_data/L1.xes')
+        test_transitions, test_places, test_edges = am.alpha_miner('static/test_files/xes_files/L1.xes')
 
         # assertions
         self.assertEqual(len(correct_trans_names), len(test_transitions), 'number of transition is not correct!')
@@ -72,7 +72,7 @@ class TestAlphaMiner(unittest.TestCase):
                          ds.Edge(place_c_de, trans_d), ds.Edge(place_b_de, trans_e), ds.Edge(place_b_de, trans_d), ds.Edge(trans_d, place_end)]
 
         # test results
-        test_transitions, test_places, test_edges = am.alpha_miner('log_data/L2.xes')
+        test_transitions, test_places, test_edges = am.alpha_miner('static/test_files/xes_files/L2.xes')
 
         # assertions
         self.assertEqual(len(correct_transitions), len(test_transitions), 'number of transitions not correct.')
@@ -115,7 +115,7 @@ class TestAlphaMiner(unittest.TestCase):
                             ds.Edge(place_e_fg, trans_g), ds.Edge(trans_g, end)]
 
         # test results
-        test_transitions_l3, test_places_l3, test_edges_l3 = am.alpha_miner('log_data/L3.xes')
+        test_transitions_l3, test_places_l3, test_edges_l3 = am.alpha_miner('static/test_files/xes_files/L3.xes')
 
         # assertions
         self.assertEqual(len(correct_transitions), len(test_transitions_l3), 'number of transitions not correct.')
@@ -152,7 +152,7 @@ class TestAlphaMiner(unittest.TestCase):
                             ds.Edge(trans_e, end), ds.Edge(trans_d, end)]
 
         # test results
-        test_transitions_l4, test_places_l4, test_edges_l4 = am.alpha_miner('log_data/L4.xes')
+        test_transitions_l4, test_places_l4, test_edges_l4 = am.alpha_miner('static/test_files/xes_files/L4.xes')
 
         # assertions
         self.assertEqual(len(correct_transitions), len(test_transitions_l4), 'number of transitions not correct.')
@@ -193,7 +193,7 @@ class TestAlphaMiner(unittest.TestCase):
                             ds.Edge(trans_f, end)]
 
         # test results
-        test_transitions_l5, test_places_l5, test_edges_l5 = am.alpha_miner('log_data/L5.xes')
+        test_transitions_l5, test_places_l5, test_edges_l5 = am.alpha_miner('static/test_files/xes_files/L5.xes')
 
         # assertions
         self.assertEqual(len(correct_transitions), len(test_transitions_l5), 'number of transitions not correct.')
@@ -240,7 +240,7 @@ class TestAlphaMiner(unittest.TestCase):
                             ds.Edge(trans_g, end)]
 
         # test results
-        test_transitions_l6, test_places_l6, test_edges_l6 = am.alpha_miner('log_data/L6.xes')
+        test_transitions_l6, test_places_l6, test_edges_l6 = am.alpha_miner('static/test_files/xes_files/L6.xes')
 
         # assertions
         self.assertEqual(len(correct_transitions), len(test_transitions_l6), 'number of transitions not correct.')
@@ -270,7 +270,7 @@ class TestAlphaMiner(unittest.TestCase):
         correct_edges_l7 = [ds.Edge(start, trans_a), ds.Edge(trans_a, place_a_c), ds.Edge(place_a_c, trans_c), ds.Edge(trans_c, end)]
 
         # test results
-        test_transitions_l7, test_places_l7, test_edges_l7 = am.alpha_miner('log_data/L7.xes')
+        test_transitions_l7, test_places_l7, test_edges_l7 = am.alpha_miner('static/test_files/xes_files/L7.xes')
 
         # assertions
         self.assertEqual(len(correct_transitions), len(test_transitions_l7), 'number of transitions not correct.')
@@ -303,7 +303,7 @@ class TestAlphaMiner(unittest.TestCase):
                          ds.Edge(place_start, trans_write), ds.Edge(trans_deliver, place_end)]
 
         # test results
-        test_transitions, test_places, test_edges = am.alpha_miner('log_data/billinstances.xes')
+        test_transitions, test_places, test_edges = am.alpha_miner('static/test_files/xes_files/billinstances.xes')
 
         # assertions
         self.assertEqual(len(correct_transitions), len(test_transitions), 'number of transitions not correct.')
@@ -339,7 +339,7 @@ class TestAlphaMiner(unittest.TestCase):
                          ds.Edge(p_start, trans_receive), ds.Edge(trans_deliver, p_end)]
 
         # test results
-        test_transitions, test_places, test_edges = am.alpha_miner('log_data/posterinstances.xes')
+        test_transitions, test_places, test_edges = am.alpha_miner('static/test_files/xes_files/posterinstances.xes')
 
         # assertions
         self.assertEqual(len(correct_transitions), len(test_transitions), 'number of transitions not correct.')
@@ -375,7 +375,7 @@ class TestAlphaMiner(unittest.TestCase):
                                ds.Edge(place_print_deliver, trans_deliver), ds.Edge(trans_deliver, end)]
 
         # test results
-        test_transitions_flyer, test_places_flyer, test_edges_flyer = am.alpha_miner('log_data/flyerinstances.xes')
+        test_transitions_flyer, test_places_flyer, test_edges_flyer = am.alpha_miner('static/test_files/xes_files/flyerinstances.xes')
 
         # assertions
         self.assertEqual(len(correct_transitions), len(test_transitions_flyer), 'number of transitions not correct.')
@@ -421,7 +421,7 @@ class TestAlphaMiner(unittest.TestCase):
                                  ds.Edge(trans_reject, end)]
 
         # test results
-        test_transitions_running, test_places_running, test_edges_running = am.alpha_miner('log_data/running-example.xes')
+        test_transitions_running, test_places_running, test_edges_running = am.alpha_miner('static/test_files/xes_files/running-example.xes')
 
         # assertions
         self.assertEqual(len(correct_transitions), len(test_transitions_running), 'number of transitions not correct.')
