@@ -1,4 +1,4 @@
-# Practical Course: Process Minining - Transformative Business Knowledge 
+# Practical Course: Process Mining - Transformative Business Knowledge 
 
 ## Description
 
