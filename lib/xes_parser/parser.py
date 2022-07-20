@@ -175,13 +175,3 @@ def difference(lst1, lst2):
         if m:
             result.append(a[j])
     return result
-
-
-def main():
-    (header, body) = prepare('log_data/L1.xes')
-    traces = parse_body(body)
-    print(str(traces))
-
-
-if __name__ == "__main__":
-    main()
